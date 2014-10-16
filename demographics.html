@@ -1,0 +1,177 @@
+<!doctype html>
+<!--
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>demographics</title>
+
+  <!--
+      **********************
+      Form inputs
+      **********************
+  -->
+
+  <link href="https://www.polymer-project.org/components/paper-input/paper-input.html" rel="import">
+
+  <style shim-shadowdom>
+  
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      margin: 0;
+      padding: 24px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+
+    paper-input.narrow {
+      width: 150px;
+    }
+    
+  </style>
+
+    <!--
+      **********************
+      Checkboxes
+      **********************
+  -->
+
+  <link rel="import" href="https://www.polymer-project.org/components/paper-checkbox/paper-checkbox.html">
+
+  <style shim-shadowdom>
+
+    paper-checkbox {
+      padding: 20px 20px 20px 0;
+    }
+    
+    paper-checkbox.blue::shadow #ink[checked] {
+      color: #4285f4;
+    }
+    
+    paper-checkbox.blue::shadow #checkbox.checked {
+      border-color: #4285f4;
+    }
+
+    paper-checkbox.purple::shadow #ink[checked] {
+      color: #9c27b0;
+    }
+    
+    paper-checkbox.purple::shadow #checkbox.checked {
+      border-color: #9c27b0;
+    }
+    
+  </style>
+
+  <!--
+      **********************
+      Slider
+      **********************
+  -->
+
+  <link rel="import" href="https://www.polymer-project.org/components/paper-slider/paper-slider.html">
+  
+  <style shim-shadowdom>
+  
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      margin: 0;
+      padding: 24px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+    
+    paper-slider {
+      width: 100%;
+    }
+    
+    section {
+      max-width: 1000px;
+      padding: 20px 0;
+      background-color: #f0f0f0;
+    }
+    
+    section > div {
+      padding: 14px;
+    }
+    
+    .yellow-slider paper-slider::shadow #sliderKnobInner,
+    .yellow-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+      background-color: #f4b400;
+    }
+    
+    .green-slider paper-slider::shadow #sliderKnobInner,
+    .green-slider paper-slider::shadow #sliderKnobInner::before,
+    .green-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+      background-color: #0f9d58;
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .no-bottom-margin {
+      margin-bottom: 0px;
+    }
+    
+  </style>
+
+</head>
+<body unresolved>
+
+    <div id="demographics">
+  <p class="subtitle">How would you describe yourself?</p>
+
+  <div horizontal layout>
+    <paper-checkbox class="purple" id="sccu"></paper-checkbox>
+    <div vertical layout>
+      <h4>Undergraduate Coursework student</h4>
+    </div>
+  </div>
+
+    <div horizontal layout>
+    <paper-checkbox class="purple" id="scrph"></paper-checkbox>
+    <div vertical layout>
+      <h4>PhD Researcher</h4>
+    </div>
+  </div>
+
+  <div horizontal layout>
+    <paper-checkbox class="purple" id="fat"></paper-checkbox>
+    <div vertical layout>
+      <h4>Academic Teaching &amp; Research Staff</h4>
+    </div>
+  </div>
+
+    <div horizontal layout>
+    <paper-checkbox class="purple" id="far"></paper-checkbox>
+    <div vertical layout>
+      <h4>Academic Research Staff</h4>
+    </div>
+  </div>
+
+  <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
+  <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
+  <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
+  <paper-fab mini icon="arrow-forward"></paper-fab>
+</div>
+  
+</body>
+</html>

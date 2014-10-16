@@ -1,0 +1,266 @@
+<!doctype html>
+<!--
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>main-survey</title>
+
+  <!--
+      **********************
+      Form inputs
+      **********************
+  -->
+
+  <link href="https://www.polymer-project.org/components/paper-input/paper-input.html" rel="import">
+
+  <style shim-shadowdom>
+  
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      margin: 0;
+      padding: 24px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+
+    paper-input.narrow {
+      width: 150px;
+    }
+    
+  </style>
+
+  <!--
+      **********************
+      Dialog, buttons
+      **********************
+  -->
+
+  <link href="https://www.polymer-project.org/components/paper-button/paper-button.html" rel="import">
+  <link rel="import" href="https://www.polymer-project.org/components/paper-dialog/paper-dialog-transition.html">
+  <link href="https://www.polymer-project.org/components/paper-dialog/paper-dialog.html" rel="import">
+
+  <style>
+    body {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.87);
+    }
+
+    paper-button[autofocus] {
+      color: #5264AE;
+    }
+    paper-button.colored {
+      color: #5264AE;
+    }
+
+    paper-button[raised].colored {
+      background: #5264AE;
+      color: #fff;
+    }
+
+    paper-button[raised].colored > a {
+      text-decoration: none;
+      background: #5264AE;
+      color: #fff;
+    }
+
+    paper-button[raised].colored:hover {
+      background: #3949ab;
+      color: #fff;
+    }
+
+    paper-button.custom > core-icon {
+      margin-right: 4px;
+    }
+
+    paper-button.hover:hover {
+      background: #eee;
+    }
+
+    paper-button.blue-ripple::shadow #ripple {
+      color: #303f9f;
+    }
+  </style>
+
+    <!--
+      **********************
+      Checkboxes
+      **********************
+  -->
+
+  <link rel="import" href="https://www.polymer-project.org/components/paper-checkbox/paper-checkbox.html">
+
+  <style shim-shadowdom>
+
+    paper-checkbox {
+      padding: 20px 20px 20px 0;
+    }
+    
+    paper-checkbox.blue::shadow #ink[checked] {
+      color: #4285f4;
+    }
+    
+    paper-checkbox.blue::shadow #checkbox.checked {
+      border-color: #4285f4;
+    }
+
+    paper-checkbox.purple::shadow #ink[checked] {
+      color: #9c27b0;
+    }
+    
+    paper-checkbox.purple::shadow #checkbox.checked {
+      border-color: #9c27b0;
+    }
+    
+  </style>
+
+  <!--
+      **********************
+      Slider
+      **********************
+  -->
+
+  <link rel="import" href="https://www.polymer-project.org/components/paper-slider/paper-slider.html">
+  
+  <style shim-shadowdom>
+  
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      margin: 0;
+      padding: 24px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+    
+    paper-slider {
+      width: 100%;
+    }
+    
+    section {
+      max-width: 1000px;
+      padding: 20px 0;
+      background-color: #f0f0f0;
+    }
+    
+    section > div {
+      padding: 14px;
+    }
+    
+    .yellow-slider paper-slider::shadow #sliderKnobInner,
+    .yellow-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+      background-color: #f4b400;
+    }
+    
+    .green-slider paper-slider::shadow #sliderKnobInner,
+    .green-slider paper-slider::shadow #sliderKnobInner::before,
+    .green-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+      background-color: #0f9d58;
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .no-bottom-margin {
+      margin-bottom: 0px;
+    }
+    
+  </style>
+
+</head>
+<body unresolved>
+
+    <h1 class="no-bottom-margin">How useful are the following features to you?</h1>
+<p class="subtitle">Where 10 is extremely valuable to you, and 0 is of no use to you.</p><br><br>
+
+  <section>
+  
+    <div left vertical layout>
+      <div>Library academic content<p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
+
+      <paper-slider snaps value="5" max="10" editable id="rating"></paper-slider>
+    </div>
+    
+    <br>
+    <br>
+    
+    <div left vertical layout>
+      <div>Recommended or personalised library academic content<p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+    
+    <br>
+    <hr>
+    <br>
+    
+    <div left vertical layout>
+      <div>Past Exams</div><br>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+
+    <div left vertical layout>
+      <div>Recommended or personalised past exams<p class="subtitle">(based on your course enrollment, proximity to exam period, etc)</p></div>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+    
+    <br>
+    <hr>
+    <br>
+    
+    <div left vertical layout>
+      <div>Booking a room</div><br>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+
+    <br>
+    <br>
+    
+    <div left vertical layout>
+      <div>Recommended or personalised room booking suggestions<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    
+    <div left vertical layout>
+      <div>General Computer Availability/Library Opening Hours</div><br>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+
+    <br>
+    <br>
+    
+    <div left vertical layout>
+      <div>Personalised Computer Availability/Library Opening Hours<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
+      <paper-slider snaps value="5" max="10" editable></paper-slider>
+    </div>
+
+    <br><br>
+  <paper-button raised class="hover"><core-icon icon="undo"></core-icon>Reset</paper-button>
+  <paper-button raised class="hover colored" onClick="getData()"><core-icon icon="check"></core-icon>Submit</a></paper-button>
+  
+</body>
+</html>
