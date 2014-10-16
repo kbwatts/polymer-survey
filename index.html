@@ -300,6 +300,18 @@
     .back-button:hover {
       background: #5c6bc0;
     }
+    .reset-button {
+      background: #9e9e9e;
+    }
+    .reset-button:hover {
+      background: #757575;
+    }
+    .finish-button {
+      background: #259b24;
+    }
+    .finish-button:hover {
+      background: #0a8f08;
+    }
   </style>
   
 </head>
@@ -346,8 +358,8 @@
         <paper-input floatingLabel type="date" error="Please enter today's date!" id="date"></paper-input>
         <br>
         <paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button>
-        <paper-button class="hover" affirmative onclick="complete()"><core-icon icon="clear"></core-icon>Decline</paper-button>
-        <paper-button class="hover colored" affirmative autofocus onclick="accept()"><core-icon icon="check"></core-icon>Accept</paper-button>
+        <paper-button class="hover" affirmative onclick="setTimeout(function() {complete();},300);"><core-icon icon="clear"></core-icon>Decline</paper-button>
+        <paper-button class="hover colored" affirmative autofocus onclick="setTimeout(function() {accept();},300);"><core-icon icon="check"></core-icon>Accept</paper-button>
         </div>
 
         <!---->
@@ -391,8 +403,8 @@
           <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
           <br>
           <div layout horizontal center>
-          <paper-fab mini icon="arrow-back" class="back-button" onclick="back()"></paper-fab>
-          <paper-fab mini icon="arrow-forward" onclick="gotoValues()"></paper-fab>
+          <paper-fab mini icon="arrow-back" class="back-button" onclick="setTimeout(function() {back();},200);"></paper-fab>
+          <paper-fab mini icon="arrow-forward" onclick="setTimeout(function() {gotoValues();},200);"></paper-fab>
             </div>
         </div>
 
@@ -470,10 +482,9 @@
 
           </section>
           <br><br>
-          <paper-fab mini icon="arrow-back" class="back-button" onclick="back2()"></paper-fab>
-          <br><br>
-          <paper-button raised class="hover" onclick="location.reload()"><core-icon icon="undo"></core-icon>Reset</paper-button>
-          <paper-button raised class="hover colored" onClick="getData()"><core-icon icon="check"></core-icon>Submit</a></paper-button>
+          <paper-fab mini icon="arrow-back" class="back-button" onclick="setTimeout(function() {back2();},200);"></paper-fab>
+          <paper-fab mini icon="undo" class="reset-button" onclick="setTimeout(function() {location.reload();},300);"></paper-fab>
+          <paper-fab mini icon="check" class="finish-button" onclick="setTimeout(function() {getData();},800);"></paper-fab>
         </div>
         <br>
         <div id="warning" hidden>
@@ -483,7 +494,7 @@
         <div id="complete" hidden>
           <p> Thank you! </p>
           <br>
-          <paper-button class="hover" onclick="location.reload()"><core-icon icon="close"></core-icon>Close</paper-button>
+          <paper-button class="hover" onclick="setTimeout(function() {location.reload();},800);"><core-icon icon="close"></core-icon>Close</paper-button>
         </div>
         <paper-shadow z="2"></paper-shadow>
     </div>
@@ -510,16 +521,16 @@
       var date = document.getElementById('date').value;
 
 //      Uncomment these 2 lines and comment out the if/else clauses below to enable dev mode
-//      document.getElementById('consent').setAttribute('hidden', 'true');
-//      document.getElementById('demographics').removeAttribute('hidden');
+      document.getElementById('consent').setAttribute('hidden', 'true');
+      document.getElementById('demographics').removeAttribute('hidden');
 
-      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
-        document.getElementById('consent').setAttribute('hidden', 'true');
-        document.getElementById('demographics').removeAttribute('hidden');
-        warningState.setAttribute('hidden', 'true');
-      } else {
-        warningState.removeAttribute('hidden');
-      }
+//      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
+//        document.getElementById('consent').setAttribute('hidden', 'true');
+//        document.getElementById('demographics').removeAttribute('hidden');
+//        warningState.setAttribute('hidden', 'true');
+//      } else {
+//        warningState.removeAttribute('hidden');
+//      }
     }
 
     function toggleWarning() {
@@ -531,16 +542,17 @@
 
     }
 
-    function complete() {
-      document.getElementById('consent').setAttribute('hidden', 'true');
-      document.getElementById('demographics').setAttribute('hidden', 'true');
-      document.getElementById('complete').removeAttribute('hidden');
-    }
-
     function gotoValues() {
       document.getElementById('demographics').setAttribute('hidden', 'true');
       document.getElementById('values').removeAttribute('hidden');
       warningState.setAttribute('hidden', 'true');
+    }
+
+    function complete() {
+      document.getElementById('consent').setAttribute('hidden', 'true');
+      document.getElementById('demographics').setAttribute('hidden', 'true');
+      warningState.setAttribute('hidden', 'true');
+      document.getElementById('complete').removeAttribute('hidden');
     }
 
     var type = "";
