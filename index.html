@@ -32,6 +32,17 @@
 
   <link href="https://www.polymer-project.org/components/paper-menu-button/paper-menu-button.html" rel="import">
 
+  <!-- load the rest -->
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/av-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/communication-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/device-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/editor-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/hardware-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/image-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/maps-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/notification-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/social-icons.html">
+
   <style shim-shadowdom>
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -59,6 +70,13 @@
 
     .toolbar-1 {
       background-color: #5264AE;
+    }
+    core-icon {
+      height: 18px !important;
+      vertical-align: top !important;
+    }
+    core-icon:hover {
+      fill: #fb8c00;
     }
 
   </style>
@@ -313,6 +331,21 @@
       background: #0a8f08;
     }
   </style>
+
+  <!--
+        **********************
+        Toast
+        **********************
+    -->
+
+  <link rel="import" href="https://www.polymer-project.org/components/paper-toast/paper-toast.html">
+
+  <style>
+    paper-toast {
+      bottom: 50px;
+      left: 10px;
+    }
+  </style>
   
 </head>
 <body unresolved>
@@ -359,7 +392,7 @@
         <br>
         <paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button>
         <paper-button class="hover" affirmative onclick="setTimeout(function() {complete();},300);"><core-icon icon="clear"></core-icon>Decline</paper-button>
-        <paper-button class="hover colored" affirmative autofocus onclick="setTimeout(function() {accept();},300);"><core-icon icon="check"></core-icon>Accept</paper-button>
+        <paper-button class="hover colored" affirmative autofocus onclick="accept()"><core-icon icon="check"></core-icon>Accept</paper-button>
         </div>
 
         <!---->
@@ -413,23 +446,23 @@
         <!---->
 
         <div id="values" hidden>
+        <!--<div id="values">-->
           <h1 class="no-bottom-margin">Please rate how useful the following features are to you, personally:</h1>
-          <p class="subtitle">Where 10 is extremely valuable to you, and 0 is of no use to you.</p><br><br>
+          <p class="subtitle">Where 10 is extremely valuable to you, and 0 is of no use to you.</p>
 
           <section>
 
             <div left vertical layout>
-              <div>Library academic content<p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
-
-              <paper-slider snaps value="5" max="10" editable id="rating"></paper-slider>
+              <div><core-icon icon="search"></core-icon>Library academic content<p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
+              <paper-slider snaps pin value="5" max="10" editable id="rating"></paper-slider>
             </div>
 
             <br>
             <br>
 
             <div left vertical layout>
-              <div>Recommended or personalised library academic content<p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
-              <paper-slider snaps value="5" max="10" editable id="rating2"></paper-slider>
+              <div><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content<p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
+              <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
             </div>
 
             <br>
@@ -437,13 +470,13 @@
             <br>
 
             <div left vertical layout>
-              <div>Past Exams</div><br>
-              <paper-slider snaps value="5" max="10" editable id="rating3"></paper-slider>
+              <div><core-icon icon="create"></core-icon>Past Exams</div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating3"></paper-slider>
             </div>
 
             <div left vertical layout>
-              <div>Recommended or personalised past exams<p class="subtitle">(based on your course enrollment, proximity to exam period, etc)</p></div>
-              <paper-slider snaps value="5" max="10" editable id="rating4"></paper-slider>
+              <div><core-icon icon="account-circle"></core-icon>Recommended or personalised past exams<p class="subtitle">(based on your course enrollment, proximity to exam period, etc)</p></div>
+              <paper-slider snaps pin value="5" max="10" editable id="rating4"></paper-slider>
             </div>
 
             <br>
@@ -451,16 +484,16 @@
             <br>
 
             <div left vertical layout>
-              <div>Booking a room</div><br>
-              <paper-slider snaps value="5" max="10" editable id="rating5"></paper-slider>
+              <div><core-icon icon="notification:event-available"></core-icon>Booking a room</div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating5"></paper-slider>
             </div>
 
             <br>
             <br>
 
             <div left vertical layout>
-              <div>Recommended or personalised room booking suggestions<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
-              <paper-slider snaps value="5" max="10" editable id="rating6"></paper-slider>
+              <div><core-icon icon="account-circle"></core-icon>Recommended or personalised room booking suggestions<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating6"></paper-slider>
             </div>
 
             <br>
@@ -468,28 +501,65 @@
             <br>
 
             <div left vertical layout>
-              <div>General Computer Availability/Library Opening Hours</div><br>
-              <paper-slider snaps value="5" max="10" editable id="rating7"></paper-slider>
+              <div><core-icon icon="hardware:desktop-mac"></core-icon>General Computer Availability + <core-icon icon="device:access-time"></core-icon>Library Opening Hours</div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating7"></paper-slider>
             </div>
 
             <br>
             <br>
 
             <div left vertical layout>
-              <div>Personalised Computer Availability/Library Opening Hours<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
-              <paper-slider snaps value="5" max="10" editable id="rating8"></paper-slider>
+              <div><core-icon icon="account-circle"></core-icon>Personalised Computer Availability/Library Opening Hours<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating8"></paper-slider>
             </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <div left vertical layout>
+              <div><core-icon icon="maps:local-atm"></core-icon>My current holds, borrowed items, fines, etc<p class="subtitle">To make renewals, view overdue items, or pay fines</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating9"></paper-slider>
+            </div>
+
+            <br>
+            <br>
+
+            <div left vertical layout>
+              <div><core-icon icon="maps:local-print-shop"></core-icon>Papercut<p class="subtitle">To manage your print balance</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating10"></paper-slider>
+            </div>
+
+            <div left vertical layout>
+              <div><core-icon icon="note-add"></core-icon>My requested items<p class="subtitle">(document delivery, inter-library loans, etc)</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating11"></paper-slider>
+            </div>
+
+            <br>
+            <br>
+
+            <div left vertical layout>
+              <div><core-icon icon="social:question-answer"></core-icon>Real-time chat help with librarian</div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating11"></paper-slider>
+            </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <paper-input floatingLabel multiline label="Do you wish there were any other library services?" id="other-values"></paper-input>
 
           </section>
           <br><br>
           <paper-fab mini icon="arrow-back" class="back-button" onclick="setTimeout(function() {back2();},200);"></paper-fab>
           <paper-fab mini icon="undo" class="reset-button" onclick="setTimeout(function() {location.reload();},300);"></paper-fab>
-          <paper-fab mini icon="check" class="finish-button" onclick="setTimeout(function() {getData();},800);"></paper-fab>
+          <paper-fab icon="check" class="finish-button" onclick="setTimeout(function() {getData();},800);"></paper-fab>
         </div>
         <br>
         <div id="warning" hidden>
           It looks like you missed something - have you filled in all the fields?
         </div>
+        <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
 
         <div id="complete" hidden>
           <p> Thank you! </p>
@@ -501,18 +571,19 @@
 
   <script>
 
-    var warningState = document.getElementById('warning');
-
     function back() {
       document.getElementById('consent').removeAttribute('hidden');
       document.getElementById('demographics').setAttribute('hidden', 'true');
-      warningState.setAttribute('hidden', 'true');
     }
 
     function back2() {
       document.getElementById('demographics').removeAttribute('hidden');
       document.getElementById('values').setAttribute('hidden', 'true');
-      warningState.setAttribute('hidden', 'true');
+    }
+
+    function next() {
+      document.getElementById('consent').setAttribute('hidden', 'true');
+      document.getElementById('demographics').removeAttribute('hidden');
     }
 
     function accept() {
@@ -521,37 +592,28 @@
       var date = document.getElementById('date').value;
 
 //      Uncomment these 2 lines and comment out the if/else clauses below to enable dev mode
-      document.getElementById('consent').setAttribute('hidden', 'true');
-      document.getElementById('demographics').removeAttribute('hidden');
+//      document.getElementById('consent').setAttribute('hidden', 'true');
+//      document.getElementById('demographics').removeAttribute('hidden');
 
-//      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
-//        document.getElementById('consent').setAttribute('hidden', 'true');
-//        document.getElementById('demographics').removeAttribute('hidden');
-//        warningState.setAttribute('hidden', 'true');
-//      } else {
-//        warningState.removeAttribute('hidden');
-//      }
+      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
+        setTimeout(function() {next();},300);
+      } else {
+        toggleWarning();
+      }
     }
 
     function toggleWarning() {
-      if (warningState.hidden == true) {
-        warningState.removeAttribute('hidden');
-      } else {
-        warningState.setAttribute('hidden', 'true');
-      }
-
+      document.querySelector('#toast1').show();
     }
 
     function gotoValues() {
       document.getElementById('demographics').setAttribute('hidden', 'true');
       document.getElementById('values').removeAttribute('hidden');
-      warningState.setAttribute('hidden', 'true');
     }
 
     function complete() {
       document.getElementById('consent').setAttribute('hidden', 'true');
       document.getElementById('demographics').setAttribute('hidden', 'true');
-      warningState.setAttribute('hidden', 'true');
       document.getElementById('complete').removeAttribute('hidden');
     }
 
