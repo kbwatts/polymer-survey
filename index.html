@@ -75,9 +75,6 @@
       height: 18px !important;
       vertical-align: top !important;
     }
-    core-icon:hover {
-      fill: #fb8c00;
-    }
 
   </style>
 
@@ -404,28 +401,28 @@
           <p class="subtitle">Please tick the boxes that describe you:</p>
 
           <div horizontal layout>
-            <paper-checkbox class="blue" id="sccu"></paper-checkbox>
+            <paper-checkbox class="blue" id="undergrad"></paper-checkbox>
             <div vertical layout>
               <h4>Undergraduate Coursework student</h4>
             </div>
           </div>
 
           <div horizontal layout>
-            <paper-checkbox class="blue" id="scrph"></paper-checkbox>
+            <paper-checkbox class="blue" id="phd"></paper-checkbox>
             <div vertical layout>
               <h4>PhD Researcher</h4>
             </div>
           </div>
 
           <div horizontal layout>
-            <paper-checkbox class="blue" id="fat"></paper-checkbox>
+            <paper-checkbox class="blue" id="teaching"></paper-checkbox>
             <div vertical layout>
               <h4>Academic Teaching &amp; Research Staff</h4>
             </div>
           </div>
 
           <div horizontal layout>
-            <paper-checkbox class="blue" id="far"></paper-checkbox>
+            <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
             <div vertical layout>
               <h4>Academic Research Staff</h4>
             </div>
@@ -454,11 +451,8 @@
 
             <div left vertical layout>
               <div><core-icon icon="search"></core-icon>Library academic content<p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
-              <paper-slider snaps pin value="5" max="10" editable id="rating"></paper-slider>
+              <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
             </div>
-
-            <br>
-            <br>
 
             <div left vertical layout>
               <div><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content<p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
@@ -488,9 +482,6 @@
               <paper-slider snaps pin value="5" max="10" editable id="rating5"></paper-slider>
             </div>
 
-            <br>
-            <br>
-
             <div left vertical layout>
               <div><core-icon icon="account-circle"></core-icon>Recommended or personalised room booking suggestions<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
               <paper-slider snaps pin value="5" max="10" editable id="rating6"></paper-slider>
@@ -505,11 +496,8 @@
               <paper-slider snaps pin value="5" max="10" editable id="rating7"></paper-slider>
             </div>
 
-            <br>
-            <br>
-
             <div left vertical layout>
-              <div><core-icon icon="account-circle"></core-icon>Personalised Computer Availability/Library Opening Hours<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
+              <div><core-icon icon="account-circle"></core-icon>Personalised Computer Availability + Library Opening Hours<p class="subtitle">(based on your primary campus location, room booking history, etc)</p></div><br>
               <paper-slider snaps pin value="5" max="10" editable id="rating8"></paper-slider>
             </div>
 
@@ -522,9 +510,6 @@
               <paper-slider snaps pin value="5" max="10" editable id="rating9"></paper-slider>
             </div>
 
-            <br>
-            <br>
-
             <div left vertical layout>
               <div><core-icon icon="maps:local-print-shop"></core-icon>Papercut<p class="subtitle">To manage your print balance</p></div><br>
               <paper-slider snaps pin value="5" max="10" editable id="rating10"></paper-slider>
@@ -535,12 +520,23 @@
               <paper-slider snaps pin value="5" max="10" editable id="rating11"></paper-slider>
             </div>
 
+            <div left vertical layout>
+              <div><core-icon icon="question-answer"></core-icon>Real-time chat help with librarian</div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating12"></paper-slider>
+            </div>
+
             <br>
+            <hr>
             <br>
 
             <div left vertical layout>
-              <div><core-icon icon="social:question-answer"></core-icon>Real-time chat help with librarian</div><br>
-              <paper-slider snaps pin value="5" max="10" editable id="rating11"></paper-slider>
+              <div><core-icon icon="maps:local-library"></core-icon>Learning Resources<p class="subtitle">Includes course reading lists, LibGuides, etc</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating13"></paper-slider>
+            </div>
+
+            <div left vertical layout>
+              <div><core-icon icon="account-circle"></core-icon>Personalised Learning Resources<p class="subtitle">Based on your course enrolment and week in semester</p></div><br>
+              <paper-slider snaps pin value="5" max="10" editable id="rating14"></paper-slider>
             </div>
 
             <br>
@@ -555,10 +551,7 @@
           <paper-fab mini icon="undo" class="reset-button" onclick="setTimeout(function() {location.reload();},300);"></paper-fab>
           <paper-fab icon="check" class="finish-button" onclick="setTimeout(function() {getData();},800);"></paper-fab>
         </div>
-        <br>
-        <div id="warning" hidden>
-          It looks like you missed something - have you filled in all the fields?
-        </div>
+
         <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
 
         <div id="complete" hidden>
@@ -587,19 +580,14 @@
     }
 
     function accept() {
-      var name = document.getElementById('name').value;
-      var email = document.getElementById('email').value;
-      var date = document.getElementById('date').value;
-
 //      Uncomment these 2 lines and comment out the if/else clauses below to enable dev mode
-//      document.getElementById('consent').setAttribute('hidden', 'true');
-//      document.getElementById('demographics').removeAttribute('hidden');
+      setTimeout(function() {next();},300);
 
-      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
-        setTimeout(function() {next();},300);
-      } else {
-        toggleWarning();
-      }
+//      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
+//        setTimeout(function() {next();},300);
+//      } else {
+//        toggleWarning();
+//      }
     }
 
     function toggleWarning() {
@@ -625,27 +613,41 @@
       var email = document.getElementById('email').value;
       var date = document.getElementById('date').value;
 
-      var rating = document.getElementById('rating').value;
+      var rating1 = document.getElementById('rating1').value;
+      var rating2 = document.getElementById('rating2').value;
+      var rating3 = document.getElementById('rating3').value;
+      var rating4 = document.getElementById('rating4').value;
+      var rating5 = document.getElementById('rating5').value;
+      var rating6 = document.getElementById('rating6').value;
+      var rating7 = document.getElementById('rating7').value;
+      var rating8 = document.getElementById('rating8').value;
+      var rating9 = document.getElementById('rating9').value;
+      var rating10 = document.getElementById('rating10').value;
+      var rating11 = document.getElementById('rating11').value;
+      var rating12 = document.getElementById('rating12').value;
+      var rating13 = document.getElementById('rating13').value;
+      var rating14 = document.getElementById('rating14').value;
 
-      if (document.getElementById('sccu').checked == true) {
-        type = type.concat("sccu%20");
+      if (document.getElementById('undergrad').checked == true) {
+        type = type.concat("undergrad%20");
       }
-      if (document.getElementById('scrph').checked == true) {
-        type = type.concat("scrph%20");
+      if (document.getElementById('phd').checked == true) {
+        type = type.concat("phd%20");
       }
-      if (document.getElementById('fat').checked == true) {
-       type = type.concat("fat%20");
+      if (document.getElementById('teaching').checked == true) {
+       type = type.concat("teaching%20");
       }
-      if (document.getElementById('far').checked == true) {
-        type = type.concat("far%20");
+      if (document.getElementById('teaching-research').checked == true) {
+        type = type.concat("teaching%20and%20research%20");
       }
       var research = document.getElementById('research-area').value;
       var frustrated = document.getElementById('what-frustrated').value;
       var past = document.getElementById('past-terms').value;
+      var other = document.getElementById('other-values').value;
 
       window.location = 'data:application/csv;charset=utf-8,'
-        + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%0A'
-        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating + '%2C';
+        + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%2C' + 'Q2' + '%2C' + 'Q3' + '%2C' + 'Q4' + '%2C' + 'Q5' + '%2C' + 'Q6' + '%2C' + 'Q7' + '%2C' + 'Q8' + '%2C' + 'Q9' + '%2C' + 'Q10' + '%2C' + 'Q11' + '%2C' + 'Q12' + '%2C' + 'Q13' + '%2C' + 'Q14' + '%2C' + 'Other Values' + '%0A'
+        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C' + rating3 + '%2C' + rating4 + '%2C' + rating5 + '%2C' + rating6 + '%2C' + rating7 + '%2C' + rating8 + '%2C' + rating9 + '%2C' + rating10 + '%2C' + rating11 + '%2C' + rating12 + '%2C' + rating13 + '%2C' + rating14 + '%2C' + other + '%2C';
   }
   
   </script>
