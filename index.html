@@ -581,13 +581,13 @@
 
     function accept() {
 //      Uncomment these 2 lines and comment out the if/else clauses below to enable dev mode
-      setTimeout(function() {next();},300);
+//      setTimeout(function() {next();},300);
 
-//      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
-//        setTimeout(function() {next();},300);
-//      } else {
-//        toggleWarning();
-//      }
+      if ((name.length > 0) && (email.length > 0) && (date.length > 0)) {
+        setTimeout(function() {next();},300);
+      } else {
+        toggleWarning();
+      }
     }
 
     function toggleWarning() {
