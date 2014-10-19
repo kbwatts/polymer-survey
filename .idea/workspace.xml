@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="c379aa60-6721-4035-b4cb-367d8c644757" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animate-survey.html" afterPath="$PROJECT_DIR$/animate-survey.html" />
     </list>
+=======
+    <list default="true" id="c379aa60-6721-4035-b4cb-367d8c644757" name="Default" comment="" />
+>>>>>>> Stashed changes
     <ignored path="polymer-survey.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
