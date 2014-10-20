@@ -13,8 +13,16 @@
 <head>
 
     <script src="https://www.polymer-project.org/components/platform/platform.js"></script>
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/av-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/communication-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/device-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/editor-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/hardware-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/image-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/maps-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/notification-icons.html">
+    <link rel="import" href="https://www.polymer-project.org/components/core-icons/social-icons.html">
     <link href="https://www.polymer-project.org/components/core-animated-pages/core-animated-pages.html" rel="import">
-    <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/cross-fade.html" rel="import">
     <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/slide-from-right.html" rel="import">
 
     <link href="https://www.polymer-project.org/components/paper-shadow/paper-shadow.html" rel="import">
@@ -195,6 +203,7 @@
         }
 
         core-icon {
+            color: #333;
             vertical-align: top !important;
         }
 
@@ -227,7 +236,7 @@
                 <div horizontal layout>
                     <div><paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button></div>
                     <div flex></div>
-                    <div><paper-fab id="check" icon="check" onclick="next()"></paper-fab></div>
+                    <div></paper-fab><paper-fab id="check" icon="check" onclick="next()"></paper-fab></div>
                 </div>
 
 
@@ -272,7 +281,7 @@
 
                 <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
                 <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
-                <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
+                <paper-input floatingLabel multiline label="2 or 3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
                 <br>
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
@@ -284,6 +293,59 @@
                 <paper-shadow z="1"></paper-shadow></div>
         </div>
     </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <div class="card">
+
+                <div left vertical layout>
+                    <div><h2 class="no-bottom-margin"><core-icon icon="av:web"></core-icon> How easily can you use and navigate the web?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p></div>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                </div>
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+                <paper-shadow z="4"></paper-shadow></div>
+        </div>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <div class="card">
+
+                <div left vertical layout>
+                    <div><h2 class="no-bottom-margin"><core-icon icon="hardware:phonelink"></core-icon> How often do you try to access the UQ Library website in these situations?</h2><p class="subtitle">Where 0 is never and 10 is daily.</p></div>
+
+                    <h3>Desktop/Laptop</h3>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                    <h3>Tablet/Smartphone</h3>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                    <h3>On campus</h3>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                    <h3>At home</h3>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                    <h3>In transit</h3>
+                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                </div>
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+                <paper-shadow z="4"></paper-shadow></div>
+        </div>
+    </section>
+
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
@@ -303,6 +365,7 @@
                 <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
+
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
@@ -321,6 +384,7 @@
                 <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
+
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
@@ -339,11 +403,15 @@
                 <paper-shadow z="4"></paper-shadow></div>
         </div>
     </section>
+
+
+
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
                 <h2>Thank you.</h2>
+                <br>
 
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
@@ -359,7 +427,7 @@
 <script>
     var p = document.querySelector('core-animated-pages');
     var up = true;
-    var max = 5;
+    var max = 7;
 
     function stuff() {
         if (up && p.selected === max || !up && p.selected === 0) {
