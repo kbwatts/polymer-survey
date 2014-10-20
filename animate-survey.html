@@ -31,6 +31,8 @@
 
     <link rel="import" href="https://www.polymer-project.org/components/paper-checkbox/paper-checkbox.html">
 
+    <link rel="import" href="https://www.polymer-project.org/components/paper-slider/paper-slider.html">
+
     <style>
         body {
             font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -53,6 +55,9 @@
         }
         .card > p {
             font-size: 13px;
+        }
+        #instructions {
+            font-size: 18px;
         }
 
         core-animated-pages {
@@ -113,12 +118,12 @@
 
         paper-fab {
             color: #fff;
-            background: #3f51b5;
+            background: #5677fc;
             margin-right:2em;
         }
         paper-fab:hover {
             color: #fff;
-            background: #3949ab;
+            background: #4e6cef;
             margin-right: 2em;
         }
         .back-button {
@@ -164,6 +169,35 @@
         paper-checkbox.blue::shadow #checkbox.checked {
             border-color: #3f51b5;
         }
+
+        paper-slider {
+            width: 100%;
+        }
+        .yellow-slider paper-slider::shadow #sliderKnobInner,
+        .yellow-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+            background-color: #f4b400;
+        }
+
+        .green-slider paper-slider::shadow #sliderKnobInner,
+        .green-slider paper-slider::shadow #sliderKnobInner::before,
+        .green-slider paper-slider::shadow #sliderBar::shadow #activeProgress {
+            background-color: #0f9d58;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .no-bottom-margin {
+            margin-bottom: 0px;
+        }
+
+        core-icon {
+            vertical-align: top !important;
+        }
+
 
     </style>
 
@@ -254,8 +288,11 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <p><b>Please rate how useful the following UQ Library features are to you.</b></p>
-
+                <div layout horizontal justified>
+                    <div></div>
+                <div><p id="instructions">Please rate how useful the following UQ Library features are to you.</p></div>
+                <div></div>
+                </div>
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                     <div></div>
@@ -270,6 +307,11 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
+                <div left vertical layout>
+                    <div><h2 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h2><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
+                    <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
+                </div>
+
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                     <div></div>
@@ -283,6 +325,11 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
+                <div left vertical layout>
+                    <div><h2 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h2><p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
+                    <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
+                </div>
+
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                     <div></div>
@@ -295,6 +342,8 @@
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
+
+                Placeholder
 
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
