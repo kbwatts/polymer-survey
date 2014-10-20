@@ -45,6 +45,7 @@
             margin: 20px 16px 16px 16px;
             border-radius: 2px;
             padding: 10px 35px 20px 35px;
+            width: 80%;
         }
 
         .card > h1 {
@@ -239,10 +240,10 @@
                 <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
                 <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
                 <br>
-                <div layout horizontal center>
-                    <div flex><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                    <div flex></div>
-                    <div flex><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
                 </div>
 
 
@@ -251,22 +252,57 @@
     </section>
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">Z = 2<paper-shadow z="2"></paper-shadow></div>
+            <div class="card">
+
+                <p><b>Please rate how useful the following UQ Library features are to you.</b></p>
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+
+                <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">Z = 3<paper-shadow z="3"></paper-shadow></div>
+            <div class="card">
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">Z = 4<paper-shadow z="4"></paper-shadow></div>
+            <div class="card">
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+                <paper-shadow z="4"></paper-shadow></div>
         </div>
     </section>
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">Z = 5<paper-shadow z="5"></paper-shadow></div>
+            <div class="card">
+
+                <div layout horizontal justified>
+                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div></div>
+                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+                <paper-shadow z="5"></paper-shadow></div>
         </div>
     </section>
 </core-animated-pages>
@@ -288,11 +324,15 @@
     }
 
     function next() {
-        p.selected++;
+        if (p.selected <= (max-1)) {
+            p.selected++;
+        }
     }
 
     function back() {
-        p.selected--;
+        if (p.selected > 0) {
+            p.selected--;
+        }
     }
 
 
