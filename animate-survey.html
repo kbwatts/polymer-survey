@@ -412,7 +412,7 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <h2>Thank you.</h2>
+                <h2>You've reached the end of the survey. Thank you.</h2>
                 <br>
 
                 <div layout horizontal justified>
@@ -454,21 +454,20 @@
         }
     }
 
+    // sets date to today's date
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
-
     if(dd<10) {
         dd='0'+dd
     }
-
     if(mm<10) {
         mm='0'+mm
     }
-
     today = yyyy + "-" + mm + "-" + dd;
     document.getElementById('date').setAttribute('value', today);
+    // end of date-setting
 
     function validate() {
         if ((document.getElementById('name').value.length > 0) && (document.getElementById('email').value.length > 0) && (document.getElementById('date').value.length > 0)) {
