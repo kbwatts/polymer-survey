@@ -347,8 +347,8 @@
 
                 <div layout horizontal justified>
                     <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                    <div><paper-fab mini icon="undo" showing class="reset-button" onclick=""></paper-fab></div>
-                    <div><paper-fab icon="check" showing class="finish-button" onclick=""></paper-fab></div>
+                    <div><paper-fab mini icon="undo" showing class="reset-button" onclick="reset()"></paper-fab></div>
+                    <div><paper-fab icon="check" showing class="finish-button" onclick="getData()"></paper-fab></div>
                 </div>
 
                 <paper-shadow z="5"></paper-shadow></div>
@@ -405,6 +405,79 @@
         else if (((e.keyCode == '38') || (e.keyCode == '39')) && p.selected <= (max-1)) {
             p.selected += 1;
         }
+    }
+
+    function reset() {
+
+        var inputs = document.getElementsByTagName("paper-input");
+        for (var n=0; n < inputs.length; n++) {
+                inputs[n].value = "";
+        }
+
+        var checkboxes = document.getElementsByTagName("paper-checkbox");
+        for (var m=0; m < checkboxes.length; m++) {
+            checkboxes[m].checked = false;
+        }
+
+        var sliders = document.getElementsByTagName("paper-slider");
+        for (var o=0; o < sliders.length; o++) {
+            sliders[o].value = 5;
+        }
+
+        var x = (max);
+        while (x > 0) {
+            p.selected--;
+            x--;
+        }
+    }
+
+    function getData() {
+
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var date = document.getElementById('date').value;
+
+        var type = "";
+
+        var rating1 = document.getElementById('rating1').value;
+        var rating2 = document.getElementById('rating2').value;
+//        var rating3 = document.getElementById('rating3').value;
+//        var rating4 = document.getElementById('rating4').value;
+//        var rating5 = document.getElementById('rating5').value;
+//        var rating6 = document.getElementById('rating6').value;
+//        var rating7 = document.getElementById('rating7').value;
+//        var rating8 = document.getElementById('rating8').value;
+//        var rating9 = document.getElementById('rating9').value;
+//        var rating10 = document.getElementById('rating10').value;
+//        var rating11 = document.getElementById('rating11').value;
+//        var rating12 = document.getElementById('rating12').value;
+//        var rating13 = document.getElementById('rating13').value;
+//        var rating14 = document.getElementById('rating14').value;
+
+        if (document.getElementById('undergrad').checked == true) {
+            type = type.concat("undergrad%20");
+        }
+        if (document.getElementById('phd').checked == true) {
+            type = type.concat("phd%20");
+        }
+        if (document.getElementById('teaching').checked == true) {
+            type = type.concat("teaching%20");
+        }
+        if (document.getElementById('teaching-research').checked == true) {
+            type = type.concat("teaching%20and%20research%20");
+        }
+        var research = document.getElementById('research-area').value;
+        var frustrated = document.getElementById('what-frustrated').value;
+        var past = document.getElementById('past-terms').value;
+//        var other = document.getElementById('other-values').value;
+
+//        window.location = 'data:application/csv;charset=utf-8,'
+//        + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%2C' + 'Q2' + '%2C' + 'Q3' + '%2C' + 'Q4' + '%2C' + 'Q5' + '%2C' + 'Q6' + '%2C' + 'Q7' + '%2C' + 'Q8' + '%2C' + 'Q9' + '%2C' + 'Q10' + '%2C' + 'Q11' + '%2C' + 'Q12' + '%2C' + 'Q13' + '%2C' + 'Q14' + '%2C' + 'Other Values' + '%0A'
+//        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C' + rating3 + '%2C' + rating4 + '%2C' + rating5 + '%2C' + rating6 + '%2C' + rating7 + '%2C' + rating8 + '%2C' + rating9 + '%2C' + rating10 + '%2C' + rating11 + '%2C' + rating12 + '%2C' + rating13 + '%2C' + rating14 + '%2C' + other + '%2C';
+
+        window.location = 'data:application/csv;charset=utf-8,'
+        + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%2C' + 'Q2' + '%0A'
+        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C';
     }
 </script>
 </body>
