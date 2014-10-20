@@ -29,6 +29,8 @@
 
     <link href="https://www.polymer-project.org/components/paper-fab/paper-fab.html" rel="import">
 
+    <link rel="import" href="https://www.polymer-project.org/components/paper-checkbox/paper-checkbox.html">
+
     <style>
         body {
             font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -108,11 +110,11 @@
             max-width: 400px;
         }
 
-        /*paper-fab {*/
-            /*color: #fff;*/
-            /*background: #3f51b5;*/
-            /*margin-right:2em;*/
-        /*}*/
+        paper-fab {
+            color: #fff;
+            background: #3f51b5;
+            margin-right:2em;
+        }
         paper-fab:hover {
             color: #fff;
             background: #3949ab;
@@ -150,6 +152,18 @@
             transform: none;
         }
 
+        paper-checkbox {
+            padding: 20px 20px 20px 0;
+        }
+
+        paper-checkbox.blue::shadow #ink[checked] {
+            color: #3f51b5;
+        }
+
+        paper-checkbox.blue::shadow #checkbox.checked {
+            border-color: #3f51b5;
+        }
+
     </style>
 
 </head>
@@ -171,20 +185,68 @@
                 <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
                 </p>
 
-                <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name"></paper-input>
-                <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email"></paper-input>
-                <paper-input floatingLabel type="date" error="Please enter today's date!" id="date"></paper-input>
+                <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input>
+                <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input>
+                <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input>
                 <br>
-                <paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button>
-                <paper-button class="hover" affirmative onclick="setTimeout(function() {complete();},300);"><core-icon icon="clear"></core-icon>Decline</paper-button>
-                <paper-button class="hover colored" affirmative autofocus onclick="accept()"><core-icon icon="check"></core-icon>Accept</paper-button>
-                <paper-fab id="check" icon="check" onclick="next()"></paper-fab>
+                <div horizontal layout>
+                    <div><paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button></div>
+                    <div flex></div>
+                    <div><paper-fab id="check" icon="check" onclick="next()"></paper-fab></div>
+                </div>
+
+
                 <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
+
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">Z = 1<paper-shadow z="1"></paper-shadow></div>
+            <div class="card">
+
+                <h1 class="no-bottom-margin">A little bit about you...</h1>
+                <p class="subtitle">Please tick the boxes that describe you:</p>
+
+                <div horizontal layout>
+                    <paper-checkbox class="blue" id="undergrad"></paper-checkbox>
+                    <div vertical layout>
+                        <h4>Undergraduate Coursework student</h4>
+                    </div>
+                </div>
+
+                <div horizontal layout>
+                    <paper-checkbox class="blue" id="phd"></paper-checkbox>
+                    <div vertical layout>
+                        <h4>PhD Researcher</h4>
+                    </div>
+                </div>
+
+                <div horizontal layout>
+                    <paper-checkbox class="blue" id="teaching"></paper-checkbox>
+                    <div vertical layout>
+                        <h4>Academic Teaching &amp; Research Staff</h4>
+                    </div>
+                </div>
+
+                <div horizontal layout>
+                    <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
+                    <div vertical layout>
+                        <h4>Academic Research Staff</h4>
+                    </div>
+                </div>
+
+                <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
+                <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
+                <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
+                <br>
+                <div layout horizontal center>
+                    <div flex><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                    <div flex></div>
+                    <div flex><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                </div>
+
+
+                <paper-shadow z="1"></paper-shadow></div>
         </div>
     </section>
     <section>
@@ -229,15 +291,22 @@
         p.selected++;
     }
 
+    function back() {
+        p.selected--;
+    }
 
 
-
+    function validate() {
+        if ((document.getElementById('name').value.length > 0) && (document.getElementById('email').value.length > 0) && (document.getElementById('date').value.length > 0)) {
+            document.getElementById('check').setAttribute('showing', 'true');
+        } else {
+            document.getElementById('check').removeAttribute('showing');
+        }
+    }
 
     document.onkeydown = checkKey;
     function checkKey(e) {
-//        if (document.getElementById('name').value.length > 0) {
-//            document.getElementById('check').setAttribute('showing');
-//        }
+
         e = e || window.event;
         console.log("p.selected = " + p.selected);
 
