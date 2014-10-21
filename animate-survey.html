@@ -119,10 +119,11 @@
             color: #303f9f;
         }
         paper-button[activated] {
-            color: #3f51b5;
+            background: #3f51b5;
+            color: #fff;
         }
         paper-button[activated]:hover {
-            color: #3949ab;
+            background: #3949ab;
         }
         paper-input.narrow {
             width: 150px;
@@ -262,7 +263,7 @@
                 </div>
 
                 <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
-                <paper-shadow z="2"></paper-shadow></div>
+                <paper-shadow z="4"></paper-shadow></div>
         </div>
     </section>
 
@@ -308,7 +309,7 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div>1 of 7</div>
+                            <paper-button disabled class="count" label="x of x"></paper-button>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -316,7 +317,7 @@
                 </div>
 
 
-                <paper-shadow z="1"></paper-shadow></div>
+                <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
 
@@ -335,14 +336,14 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div></div>
+                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
                 </div>
 
-                <paper-shadow z="4"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -367,14 +368,14 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div></div>
+                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
                 </div>
 
-                <paper-shadow z="4"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -400,7 +401,7 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div></div>
+                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -408,7 +409,7 @@
                 </div>
 
 
-                <paper-shadow z="2"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -429,7 +430,7 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div></div>
+                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
                         </div>
                     </div>
@@ -451,7 +452,7 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div></div>
+                            <div><paper-button disabled class="count" label="6 of 7"></paper-button></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -459,7 +460,7 @@
                 </div>
 
 
-                <paper-shadow z="4"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -491,7 +492,7 @@
 <script>
     var p = document.querySelector('core-animated-pages');
     var up = true;
-    var max = 7;
+    var max = (document.getElementsByTagName('section').length - 1);
 
     function next() {
         if (document.getElementById('check').hasAttribute('activated') === false) {
@@ -500,12 +501,21 @@
         }
         if (p.selected <= (max - 1)) {
             p.selected++;
+            setPageNumbers();
         }
     }
 
     function back() {
         if (p.selected > 0) {
             p.selected--;
+            setPageNumbers();
+        }
+    }
+
+    function setPageNumbers() {
+        var pages = document.getElementsByClassName("count");
+        for (var a=0; a < pages.length; a++) {
+            pages[a].label = p.selected + " of " + max;
         }
     }
 
@@ -527,6 +537,7 @@
     function validate() {
         if ((document.getElementById('name').value.length > 0) && (document.getElementById('email').value.length > 0) && (document.getElementById('date').value.length > 0)) {
             document.getElementById('check').setAttribute('activated', 'true');
+            document.getElementById('check').setAttribute('raised', 'true');
         } else {
             document.getElementById('check').removeAttribute('activated');
         }
@@ -545,6 +556,7 @@
         else if (((e.keyCode == '38') || (e.keyCode == '39')) && p.selected <= (max-1)) {
             p.selected += 1;
         }
+        setPageNumbers();
     }
     // End of Developer mode
 
