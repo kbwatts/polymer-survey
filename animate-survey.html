@@ -12,6 +12,7 @@
 <html>
 <head>
 
+    <title>UQ Library Survey</title>
     <script src="https://www.polymer-project.org/components/platform/platform.js"></script>
     <link rel="import" href="https://www.polymer-project.org/components/core-icons/av-icons.html">
     <link rel="import" href="https://www.polymer-project.org/components/core-icons/communication-icons.html">
@@ -265,7 +266,7 @@
                 </div>
 
                 <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
-                <paper-shadow z="4"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -319,7 +320,7 @@
                 </div>
 
 
-                <paper-shadow z="2"></paper-shadow></div>
+                <paper-shadow z="3"></paper-shadow></div>
         </div>
     </section>
 
@@ -332,7 +333,9 @@
                     <div flex>
                         <h2 class="no-bottom-margin"><core-icon icon="accessibility"></core-icon> How easily can you use and navigate the web?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                        <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
+                        <h2 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> How easily can you use and navigate UQ Library's website?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                        <paper-input floatingLabel multiline label="Any frustrations with UQ Library website?" id="what-frustrated"></paper-input><br>
                         <paper-input floatingLabel multiline label="2 or 3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
                     </div>
                     <div>
