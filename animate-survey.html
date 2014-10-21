@@ -41,6 +41,8 @@
 
     <link rel="import" href="https://www.polymer-project.org/components/paper-slider/paper-slider.html">
 
+    <link rel="import" href="https://www.polymer-project.org/components/paper-toast/paper-toast.html">
+
     <style>
         body {
             font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -51,7 +53,7 @@
             background: white;
             font-size: 13px;
             color: #333;
-            height: auto;
+            height: 80%;
             margin: 20px 16px 16px 16px;
             border-radius: 2px;
             padding: 10px 35px 20px 35px;
@@ -116,6 +118,12 @@
         paper-button.blue-ripple::shadow #ripple {
             color: #303f9f;
         }
+        paper-button[activated] {
+            color: #3f51b5;
+        }
+        paper-button[activated]:hover {
+            color: #3949ab;
+        }
         paper-input.narrow {
             width: 150px;
         }
@@ -165,10 +173,6 @@
             -webkit-transform: none;
             transform: none;
         }
-        paper-fab[greying] {
-            background: #999;
-        }
-
         paper-checkbox {
             padding: 20px 20px 20px 0;
         }
@@ -210,6 +214,11 @@
             vertical-align: top !important;
         }
 
+        paper-toast {
+            bottom: 50px;
+            left: 10px;
+        }
+
 
     </style>
 
@@ -220,28 +229,39 @@
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
-                <h1>UQ Library Participant Consent</h1>
-                <p>I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.</p>
-                <p>I understand that other University of Queensland employees involved with UQ Library may review these usability notes and recordings, and that I may be directly quoted or have recordings of my interactions used in internal University of Queensland documents, without reference to my name.</p>
 
-                <p>I understand that my participation is voluntary, that I can choose not to participate in part or all of the project, and that I can withdraw at any stage of the project without being penalised or disadvantaged in any way. However, if I choose to withdraw before completing all phases of the research, my information from previous stages may be analysed in the combined data.</p>
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1>UQ Library Participant Consent</h1>
+                        <p>I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.</p>
+                        <p>I understand that other University of Queensland employees involved with UQ Library may review these usability notes and recordings, and that I may be directly quoted or have recordings of my interactions used in internal University of Queensland documents, without reference to my name.</p>
 
-                <p>I understand that any usability notes, my name, address, phone number and e-mail address will not be shared with external third parties in compliance with the University of Queensland Privacy Policy published at http://www.uq.edu.au/terms-of-use/.</p>
+                        <p>I understand that my participation is voluntary, that I can choose not to participate in part or all of the project, and that I can withdraw at any stage of the project without being penalised or disadvantaged in any way. However, if I choose to withdraw before completing all phases of the research, my information from previous stages may be analysed in the combined data.</p>
 
-                <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
-                </p>
+                        <p>I understand that any usability notes, my name, address, phone number and e-mail address will not be shared with external third parties in compliance with the University of Queensland Privacy Policy published at http://www.uq.edu.au/terms-of-use/.</p>
 
-                <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input>
-                <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input>
-                <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input>
-                <br>
-                <div horizontal layout>
-                    <div><paper-button class="hover" label="More Info..." dismissive onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button></div>
-                    <div flex></div>
-                    <div></paper-fab><paper-fab id="check" icon="check" onclick="next()"></paper-fab></div>
+                        <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
+                        </p>
+                        <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input>
+                        <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input>
+                        <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-button class="hover" label="More Info..." onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button></div>
+                            <div></div>
+                            <div>
+                                <paper-button class="hover" label="Decline" onclick="finish()"></paper-button>
+                                <paper-button class="hover" label="Accept" id="check" onclick="next()"></paper-button>
+                            </div>
+                            <!--<div></paper-fab><paper-fab id="check" icon="check" greyed onclick="next()"></paper-fab></div>-->
+
+                        </div>
+                    </div>
                 </div>
 
-
+                <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
                 <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
@@ -250,45 +270,49 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <h1 class="no-bottom-margin">A little bit about you...</h1>
-                <p class="subtitle">Please tick the boxes that describe you:</p>
-
-                <div horizontal layout>
-                    <paper-checkbox class="blue" id="undergrad"></paper-checkbox>
-                    <div vertical layout>
-                        <h4>Undergraduate Coursework student</h4>
-                    </div>
-                </div>
-
-                <div horizontal layout>
-                    <paper-checkbox class="blue" id="phd"></paper-checkbox>
-                    <div vertical layout>
-                        <h4>PhD Researcher</h4>
-                    </div>
-                </div>
-
-                <div horizontal layout>
-                    <paper-checkbox class="blue" id="teaching"></paper-checkbox>
-                    <div vertical layout>
-                        <h4>Academic Teaching &amp; Research Staff</h4>
-                    </div>
-                </div>
-
-                <div horizontal layout>
-                    <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
-                    <div vertical layout>
-                        <h4>Academic Research Staff</h4>
-                    </div>
-                </div>
-
-                <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
-                <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
-                <paper-input floatingLabel multiline label="2 or 3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
-                <br>
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                <div left vertical layout style="height:100%">
                     <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <p class="subtitle">Please tick the boxes that describe you:</p>
+                        <div horizontal layout>
+                            <paper-checkbox class="blue" id="undergrad"></paper-checkbox>
+                            <div vertical layout>
+                                <h4>Undergraduate Coursework student</h4>
+                            </div>
+                        </div>
+
+                        <div horizontal layout>
+                            <paper-checkbox class="blue" id="phd"></paper-checkbox>
+                            <div vertical layout>
+                                <h4>PhD Researcher</h4>
+                            </div>
+                        </div>
+
+                        <div horizontal layout>
+                            <paper-checkbox class="blue" id="teaching"></paper-checkbox>
+                            <div vertical layout>
+                                <h4>Academic Teaching &amp; Research Staff</h4>
+                            </div>
+                        </div>
+
+                        <div horizontal layout>
+                            <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
+                            <div vertical layout>
+                                <h4>Academic Research Staff</h4>
+                            </div>
+                        </div>
+
+                        <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div>1 of 7</div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+
+                        </div>
+                    </div>
                 </div>
 
 
@@ -300,15 +324,22 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <div left vertical layout>
-                    <div><h2 class="no-bottom-margin"><core-icon icon="av:web"></core-icon> How easily can you use and navigate the web?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p></div>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                </div>
-
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                <div left vertical layout style="height:100%">
                     <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                    <div flex>
+                        <h2 class="no-bottom-margin"><core-icon icon="accessibility"></core-icon> How easily can you use and navigate the web?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                        <paper-input floatingLabel multiline label="Any frustrations with UQ Library website" id="what-frustrated"></paper-input><br>
+                        <paper-input floatingLabel multiline label="2 or 3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div></div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <paper-shadow z="4"></paper-shadow></div>
@@ -319,29 +350,28 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <div left vertical layout>
-                    <div><h2 class="no-bottom-margin"><core-icon icon="hardware:phonelink"></core-icon> How often do you try to access the UQ Library website in these situations?</h2><p class="subtitle">Where 0 is never and 10 is daily.</p></div>
-
-                    <h3>Desktop/Laptop</h3>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                    <h3>Tablet/Smartphone</h3>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                    <h3>On campus</h3>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                    <h3>At home</h3>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                    <h3>In transit</h3>
-                    <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                </div>
-
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                <div left vertical layout style="height:100%">
                     <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                    <div flex>
+                        <div><h2 class="no-bottom-margin"><core-icon icon="hardware:phonelink"></core-icon> How often do you access the UQ Library website using a...</h2><p class="subtitle">Where 0 is never and 10 is daily or more.</p></div>
+
+                        <h3>Desktop</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                        <h3>Tablet</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                        <h3>Smartphone</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div></div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <paper-shadow z="4"></paper-shadow></div>
@@ -352,15 +382,29 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <div layout horizontal justified>
+                <div left vertical layout style="height:100%">
                     <div></div>
-                <div><p id="instructions">Please rate how useful the following UQ Library features are to you.</p></div>
-                <div></div>
-                </div>
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                    <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                    <div flex>
+                        <div><h2 class="no-bottom-margin"><core-icon icon="maps:place"></core-icon> How often do you access the UQ Library website from...</h2><p class="subtitle">Where 0 is never and 10 is daily.</p></div>
+
+                        <h3>on campus</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                        <h3>in transit</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+
+                        <h3>at home</h3>
+                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                        <paper-input floatingLabel label="other..." id="access-from-other"></paper-input>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div></div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+
+                        </div>
+                    </div>
                 </div>
 
 
@@ -372,15 +416,23 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <div left vertical layout>
-                    <div><h2 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h2><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p></div>
-                    <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
-                </div>
-
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                <div left vertical layout style="height:100%">
                     <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                    <div flex>
+                        <p id="instructions">Please rate how useful the following UQ Library features are to you.</p>
+                        <h2 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h2><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p>
+                        <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
+                        <br>
+                        <h2 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h2><p class="subtitle">(based on your peers, professors, recent library history, etc)</p>
+                        <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div></div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                        </div>
+                    </div>
                 </div>
 
                 <paper-shadow z="3"></paper-shadow></div>
@@ -391,16 +443,21 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <div left vertical layout>
-                    <div><h2 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h2><p class="subtitle">(based on your peers, professors, recent library history, etc)</p></div>
-                    <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        [Placeholder]
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div></div>
+                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+
+                        </div>
+                    </div>
                 </div>
 
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                    <div></div>
-                    <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
-                </div>
 
                 <paper-shadow z="4"></paper-shadow></div>
         </div>
@@ -412,16 +469,21 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <div class="card">
 
-                <h2>You've reached the end of the survey. Thank you.</h2>
-                <br>
-
-                <div layout horizontal justified>
-                    <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                    <div><paper-fab mini icon="undo" showing class="reset-button" onclick="reset()"></paper-fab></div>
-                    <div><paper-fab mini icon="check" showing class="finish-button" onclick="getData()"></paper-fab></div>
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h2>You've reached the end of the survey. Thank you.</h2>
+                    </div>
+                    <div>
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div><paper-fab mini icon="undo" showing class="reset-button" onclick="reset()"></paper-fab></div>
+                            <div><paper-fab mini icon="check" showing class="finish-button" onclick="getData()"></paper-fab></div>
+                        </div>
+                    </div>
                 </div>
 
-                <paper-shadow z="5"></paper-shadow></div>
+                <paper-shadow z="2"></paper-shadow></div>
         </div>
     </section>
 </core-animated-pages>
@@ -431,19 +493,12 @@
     var up = true;
     var max = 7;
 
-    function stuff() {
-        if (up && p.selected === max || !up && p.selected === 0) {
-            up = !up;
-        }
-        if (up) {
-            p.selected += 1;
-        } else {
-            p.selected -= 1;
-        }
-    }
-
     function next() {
-        if (p.selected <= (max-1)) {
+        if (document.getElementById('check').hasAttribute('activated') === false) {
+            document.querySelector('#toast1').show();
+            return;
+        }
+        if (p.selected <= (max - 1)) {
             p.selected++;
         }
     }
@@ -471,12 +526,13 @@
 
     function validate() {
         if ((document.getElementById('name').value.length > 0) && (document.getElementById('email').value.length > 0) && (document.getElementById('date').value.length > 0)) {
-            document.getElementById('check').setAttribute('showing', 'true');
+            document.getElementById('check').setAttribute('activated', 'true');
         } else {
-            document.getElementById('check').removeAttribute('showing');
+            document.getElementById('check').removeAttribute('activated');
         }
     }
 
+    // Developer mode - allows keyboard navigation
     document.onkeydown = checkKey;
     function checkKey(e) {
 
@@ -490,6 +546,7 @@
             p.selected += 1;
         }
     }
+    // End of Developer mode
 
     function reset() {
 
@@ -513,6 +570,7 @@
             p.selected--;
             x--;
         }
+        validate();
     }
 
     function getData() {
