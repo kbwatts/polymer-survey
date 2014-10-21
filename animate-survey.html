@@ -83,7 +83,9 @@
             height: 100%;
             color: white;
         }
-
+        paper-button[disabled] {
+            margin-top: 5px;
+        }
         paper-button[autofocus] {
             color: #3f51b5;
         }
@@ -356,13 +358,13 @@
                     <div flex>
                         <div><h2 class="no-bottom-margin"><core-icon icon="hardware:phonelink"></core-icon> How often do you access the UQ Library website using a...</h2><p class="subtitle">Where 0 is never and 10 is daily or more.</p></div>
 
-                        <h3>Desktop</h3>
+                        <h3>desktop or laptop?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
 
-                        <h3>Tablet</h3>
+                        <h3>tablet?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
 
-                        <h3>Smartphone</h3>
+                        <h3>smartphone?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                     </div>
                     <div>
@@ -388,13 +390,13 @@
                     <div flex>
                         <div><h2 class="no-bottom-margin"><core-icon icon="maps:place"></core-icon> How often do you access the UQ Library website from...</h2><p class="subtitle">Where 0 is never and 10 is daily.</p></div>
 
-                        <h3>on campus</h3>
+                        <h3>on campus?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
 
-                        <h3>in transit</h3>
+                        <h3>in transit?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
 
-                        <h3>at home</h3>
+                        <h3>at home?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                         <paper-input floatingLabel label="other..." id="access-from-other"></paper-input>
                     </div>
@@ -420,11 +422,11 @@
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
-                        <p id="instructions">Please rate how useful the following UQ Library features are to you.</p>
-                        <h2 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h2><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p>
+                        <h2>Please rate how useful the following UQ Library features are to you.</h2>
+                        <h3 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h3><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p>
                         <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
                         <br>
-                        <h2 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h2><p class="subtitle">(based on your peers, professors, recent library history, etc)</p>
+                        <h3 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h3><p class="subtitle">(based on your peers, professors, recent library history, etc)</p>
                         <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
                     </div>
                     <div>
@@ -447,7 +449,7 @@
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
-                        [Placeholder]
+                        <h2>[Placeholder]</h2>
                     </div>
                     <div>
                         <div layout horizontal justified>
