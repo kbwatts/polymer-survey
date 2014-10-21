@@ -542,6 +542,7 @@
             document.getElementById('check').setAttribute('raised', 'true');
         } else {
             document.getElementById('check').removeAttribute('activated');
+            document.getElementById('check').removeAttribute('raised');
         }
     }
 
@@ -585,6 +586,15 @@
             x--;
         }
         validate();
+    }
+
+
+    function finish() {
+        var y = 0;
+        while (y < max) {
+            p.selected++;
+            y++;
+        }
     }
 
     function getData() {
