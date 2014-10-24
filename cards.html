@@ -1,0 +1,61 @@
+
+<!doctype html>
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<html>
+  <head>
+    <title>Cards</title>
+    <script src="http://www.polymer-project.org/components/platform/platform.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/polymer-ui-card/polymer-ui-card.html">
+    <style>
+    body {
+      background-color: #eee;
+    }
+      #cards {
+        font-family: "Roboto";
+        color: #333;
+        margin: 0 auto;
+        background: #eee;
+        overflow: auto;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+      }
+      
+      polymer-ui-card {
+        display: block;
+        height: auto;
+        /*min-height: 400px;*/
+        width: 80%;
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body unresolved fullbleed>
+    <div id="cards">
+      <polymer-ui-card swipeable><h1>UQ Library Participant Consent</h1></polymer-ui-card>
+      <polymer-ui-card swipeable>
+                        <p>I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.</p>
+      </polymer-ui-card>
+      <polymer-ui-card swipeable><p>I understand that other University of Queensland employees involved with UQ Library may review these usability notes and recordings, and that I may be directly quoted or have recordings of my interactions used in internal University of Queensland documents, without reference to my name.</p>
+</polymer-ui-card>
+      <polymer-ui-card swipeable><p>I understand that my participation is voluntary, that I can choose not to participate in part or all of the project, and that I can withdraw at any stage of the project without being penalised or disadvantaged in any way. However, if I choose to withdraw before completing all phases of the research, my information from previous stages may be analysed in the combined data.</p></polymer-ui-card>
+      <polymer-ui-card swipeable><p>I understand that any usability notes, my name, address, phone number and e-mail address will not be shared with external third parties in compliance with the University of Queensland Privacy Policy published at http://www.uq.edu.au/terms-of-use/.</p></polymer-ui-card>
+      <polymer-ui-card swipeable><p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
+      </p></polymer-ui-card>
+    </div>
+    
+    <script>
+      document.addEventListener('polymer-ready', function() {
+        document.querySelector('#cards').addEventListener(
+          'polymer-card-swipe-away', function(e) {
+            e.target.parentNode.removeChild(e.target);
+          });
+      })
+    </script>
+  </body>
+</html>
