@@ -44,6 +44,8 @@
 
     <link rel="import" href="https://www.polymer-project.org/components/paper-toast/paper-toast.html">
 
+    <link rel="import" href="https://www.polymer-project.org/components/paper-progress/paper-progress.html">
+
     <style>
         body {
             font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -139,12 +141,14 @@
         paper-fab {
             color: #fff;
             background: #5677fc;
-            margin-right:2em;
+            margin-right:1em;
+            margin-left: 1em;
         }
         paper-fab:hover {
             color: #fff;
             background: #4e6cef;
-            margin-right: 2em;
+            margin-right:1em;
+            margin-left: 1em;
         }
         .back-button {
             background: #7986cb;
@@ -223,7 +227,11 @@
             left: 10px;
         }
 
-
+        paper-progress {
+            display: block;
+            width: 100%;
+            padding: 25px 0;
+        }
     </style>
 
 </head>
@@ -300,7 +308,7 @@
                             </div>
                         </div>
 
-                        <div horizontal layout>
+                        <div right horizontal layout>
                             <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
                             <div vertical layout>
                                 <h4>Academic Research Staff</h4>
@@ -312,7 +320,8 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <paper-button disabled class="count" label="x of x"></paper-button>
+                            <!--<paper-button disabled class="count" label="x of x"></paper-button>-->
+                            <div flex><paper-progress value="1" min="0" max="7"></paper-progress></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -341,7 +350,8 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
+                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
+                            <div flex><paper-progress value="2" min="0" max="7"></paper-progress></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -373,7 +383,8 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
+                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
+                            <div flex><paper-progress value="3" min="0" max="7"></paper-progress></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -406,7 +417,8 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
+                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
+                            <div flex><paper-progress value="4" min="0" max="7"></paper-progress></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
 
                         </div>
@@ -435,7 +447,8 @@
                     <div>
                         <div layout horizontal justified>
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-button disabled class="count" label="x of x"></paper-button></div>
+                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
+                            <div flex><paper-progress value="5" min="0" max="7"></paper-progress></div>
                             <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
                         </div>
                     </div>
