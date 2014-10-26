@@ -139,6 +139,7 @@
         }
 
         paper-fab {
+            margin-top: 7px;
             color: #fff;
             background: #5677fc;
             margin-right:1em;
@@ -322,7 +323,7 @@
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                             <!--<paper-button disabled class="count" label="x of x"></paper-button>-->
                             <div flex><paper-progress value="1" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-forward" class="forward-button" showing onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
@@ -352,7 +353,7 @@
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                             <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
                             <div flex><paper-progress value="2" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
@@ -385,7 +386,7 @@
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                             <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
                             <div flex><paper-progress value="3" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
@@ -419,7 +420,7 @@
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                             <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
                             <div flex><paper-progress value="4" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
 
                         </div>
                     </div>
@@ -449,7 +450,7 @@
                             <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
                             <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
                             <div flex><paper-progress value="5" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
                         </div>
                     </div>
                 </div>
@@ -514,7 +515,7 @@
     var max = (document.getElementsByTagName('section').length - 1);
 
     function next() {
-        if (document.getElementById('check').hasAttribute('activated') === false) {
+        if ((p.selected == 0) && (document.getElementById('check').hasAttribute('activated') === false)) {
             document.querySelector('#toast1').show();
             return;
         }
@@ -532,10 +533,15 @@
     }
 
     function setPageNumbers() {
-        var pages = document.getElementsByClassName("count");
-        for (var a=0; a < pages.length; a++) {
-            pages[a].label = p.selected + " of " + max;
+        var progress = document.getElementsByTagName("paper-progress");
+        for (var a=0; a < progress.length; a++) {
+            progress[a].max = max;
+            progress[a].value = p.selected;
         }
+//        var pages = document.getElementsByClassName("count");
+//        for (var a=0; a < pages.length; a++) {
+//            pages[a].label = p.selected + " of " + max;
+//        }
     }
 
     // sets date to today's date
