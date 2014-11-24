@@ -1,0 +1,360 @@
+
+<!doctype html>
+<!--
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+<head>
+  <title>UQ Library FBS Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src="https://www.polymer-project.org/components/platform/platform.js"></script>
+  <link rel="import" href="https://www.polymer-project.org/components/core-list/core-list.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-ajax/core-ajax.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-media-query/core-media-query.html">
+  <link rel="import" href="https://www.polymer-project.org/components/paper-ripple/paper-ripple.html">
+  <!-- <link rel="import" href="https://www.polymer-project.org/components/polymer-jsonp/polymer-jsonp.html"> -->
+  <style>
+    html, body {
+      margin: 0;
+      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
+      font-family: 'Roboto';
+    }
+    
+    list-test {
+      display: block;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    .stuff {
+      min-height: 60px;
+      background: red !important;
+      border-bottom: 1px solid black;
+    }
+  </style>
+</head>
+<body fit>
+
+<list-test></list-test>
+
+<polymer-element name="list-test" layout vertical>
+<template>
+  <style>
+    .item {
+      box-sizing: border-box;
+      height: 88px;
+      border-bottom: 1px solid #ddd;
+      padding: 4px;
+      cursor: default;
+      background-color: white;
+      overflow: hidden;
+      line-height: 1.2;
+    }
+
+    .selected {
+      background: #f0f0f0;
+    }
+
+    .message {
+      margin-top: 8px;
+      padding-left: 16px;
+      line-height: 1.2;
+      background-repeat: no-repeat;
+      background-position: 10px 10px;
+      background-size: 60px;
+    }
+    .message-image {
+      margin-top: 10px;
+      margin-left: 16px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      height:40px;
+      width:40px;
+    }
+    
+    .primary {
+      font-size: 16px;
+      display: inline;
+      font-weight: normal;
+    }
+    .secondary {
+      font-size: 14px;
+    }
+    .level {
+      color: #929292;
+    }
+    
+    .timestamp {
+      margin-left: 10px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .body {
+      font-size: 12px;
+    }
+    .footer {
+      padding: 4px 0 4px 16px;
+      color: #333;
+      font-size: 12px;
+      background-color: #fff;
+    }
+
+    .spaced {
+      /*margin: 8px;*/
+      padding: 4px 0 4px 16px;
+      /*font-family: "Ubuntu Mono";*/
+      color: #fff;
+      font-size: 12px;
+      background-color: #6B1F91;
+    }
+    .spaced-info {
+      margin: 8px;
+      padding-left: 16px;
+      /*font-family: "Ubuntu Mono";*/
+      color: #555;
+      font-size: 12px;
+      background-color: #fff;
+    }
+
+    .selection-display {
+      padding: 0 2px;
+      margin: 0 2px;
+      white-space: nowrap;
+    }
+
+    .narrow {
+      width: 40px;
+    }
+
+    .subject {
+      font-size: 10px;
+      font-family: "Ubuntu Mono";
+      color: #999;
+    }
+    core-toolbar.dark-theme {
+      background-color: #6B1F91;
+      color: #fff;
+    }
+
+  </style>
+
+    <core-toolbar class="dark-theme">
+    <core-icon-button icon="arrow-back"></core-icon-button>
+    <span flex>Your Available Rooms</span>
+    <!-- <core-icon-button icon="refresh"></core-icon-button> -->
+    <core-icon-button icon="check"></core-icon-button>
+  </core-toolbar>
+
+  
+  <div layout horizontal wrap class="spaced-info">
+    
+    <template repeat="{{multi ? selection: [selection]}}">
+      <!-- <div class="selection-display">Id {{id}}: {{checked}} {{value}} {{['a','b','c'][type]}}</div> -->
+      <div class="selection-display"> {{name}} from {{details}}</div>
+    </template>
+  </div>
+  <core-list id="list" data="{{data}}" selectionEnabled="{{selectionEnabled}}"
+    selection="{{selection}}" height="80" flex multi?={{multi}}>
+    <template>
+      <div horizontal layout wrap class="item {{ {selected: selected} | tokenList }}">
+        <div class="message-image" style="background-image: url(images/{{model.image}}.png);"></div>
+        <div class="message">
+          <paper-ripple fit></paper-ripple>
+          <span class="primary">{{model.name}}</span><br>
+          <span class="secondary">Biological Sciences Library</span><br>
+          <span class="secondary level">Available from {{model.details}}</span><br>
+          
+
+          <!-- <div class="nowrap">
+          <div class="subject">Row: {{index}}, Record ID: {{model.id}}</div>
+          <input type="checkbox" checked="{{model.checked}}">
+          <input type="number" value="{{model.value}}" class="narrow">
+          <select selectedIndex="{{model.type}}"><option>a</option><option>b</option><option>c</option></select>
+          </div> -->
+        </div>
+      </div>
+    </template>
+  </core-list>
+<!--   <div class="footer">
+    <button on-tap="{{addRecord}}">Add row at index:</button>
+    <input value="{{addIdx}}" class="narrow" type="number">
+    <br>
+    <button on-tap="{{deleteRecord}}">Delete row at index:</button>
+    <input value="{{deleteIdx}}" class="narrow" type="number">
+    <br>
+    <button on-tap="{{deleteAll}}">Delete all</button>
+    <button on-tap="{{deleteArray}}">Delete data array</button>
+    <button on-tap="{{initArrayEmpty}}">Init empty array</button>
+    <button on-tap="{{initArrayFull}}">Init full array</button>
+    <br>
+    <label><input type="checkbox" checked="{{selectionEnabled}}">Selection enabled</label>
+    <label><input type="checkbox" checked="{{multi}}">Multiple selection</label>
+    <br>
+    <button on-tap="{{clearSelection}}">Clear selection</button>
+    <button on-tap="{{deleteSelection}}">Delete selection</button>
+  </div> -->
+
+  <core-ajax id="ajax"
+             auto
+             url="{{url}}"
+             on-core-response="{{availabilityLoaded}}"
+             handleAs="json">
+  </core-ajax>
+
+</template>
+<script>
+(function() {
+  var strings = [
+    "8 - 9a",
+    "8.30 - 9.30a",
+    "9 - 10a"
+  ];
+
+  // var namegen = {
+  //   generateString: function(inLength) {
+  //     var s = '';
+  //     for (var i=0; i<inLength; i++) {
+  //       s += String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  //     }
+  //     return s;
+  //   },
+  //   generateName: function(inMin, inMax) {
+  //     return this.generateString(Math.floor(Math.random() * (inMax - inMin + 1) + inMin));
+  //   }
+  // };
+
+  Polymer('list-test', {
+    addIdx: 0,
+    deleteIdx: 0,
+    count: 10,
+    url: "https://app.library.uq.edu.au/api/facilities_availability",
+
+    ready: function() {
+      this.initArrayFull();
+    },
+
+    availabilityLoaded: function() {
+      // Make a copy of the loaded data
+      var fbsData = this.$.ajax.response.slice(0);
+
+      var titles = [];
+      var id = [];
+      var resources = [];
+      var schedule = [];
+      var facilities = [];
+      var facilities_data = []
+
+      console.log("fbsData");
+      console.log(fbsData);
+
+      fbsData.filter(function (v) {
+        titles.push(v.title);
+      });
+
+      fbsData.filter(function (v) {
+        id.push(v.id);
+      });
+
+      fbsData.filter(function (v) {
+        // console.log("resources");
+        // console.log(v);
+        resources.push(v.resources);
+        // console.log(resources);
+      });
+
+      resources.filter(function (v) {
+        // console.log("schedule");
+        // console.log(v);
+        schedule=v[0];
+        // console.log(schedule.schedule.title);
+        facilities_data.push(schedule.schedule.title);
+        console.log (facilities_data);
+      });
+
+      // console.log (facilities.facilities[0].title);
+      // facilities.filter(function (v) {
+        // console.log("facilities_data");
+        // console.log(v);
+        // facilities_data.push(v.title);
+      // })
+
+      // console.log(facilities_data);
+    },
+
+    generateData: function() {
+      // var names = ["Gatton Library - Gatton Campus (Bldg 8102)", "Herston Health Sciences Library, Herston Bldg, Block 6", "Ipswich Library, Ipswich Campus (Bldg #8 level 2)", "Mater McAuley Library, Mater Hospital Bldg, Aubigny Place", "PACE Health Sciences Library, PACE Precinct, PA Hospital (#870)", "Princess Alexandra Hospital/UQ Library, (Bldg #1)", "St Lucia - Architecture / Music Library, Zelman Cowan Bldg (#51)", "St Lucia - Biological Sciences Library (#94)", "St Lucia - Dorothy Hill Engineering & Sciences Library, Hawken Bldg,(#50)", "St Lucia - Duhig Building (#2)", "St Lucia - Graduate Economics & Business Library, Lvl 2 Colin Clark Bldg, (", "St Lucia - Social Sciences & Humanities Library, (#12 & 12A)", "St Lucia - Walter Harrison Law Library, Forgan Smith Bldg, West Wing (#1)"], data = [];
+      var names = ["Data Projector", "Group Study Rooms - level 6", "Conference & Other - Level 3", "Group Rooms", "Group Study Rooms", "Group Study Rooms", "Data Projector", "Group  Rooms - Level 3", "Data Projectors", "Assistive Technology Rooms - Level 4", "Group Study Rooms", "Group Rooms, Levels 2, 3 & 4", "Data Projector"], data = [];
+      // names.sort();
+      for (i=0; i<this.count; i++) {
+        data.push({
+          id: i,
+          name: names[i],
+          details: strings[i % 3],
+          image: i % 4,
+          value: 0,
+          type: 0,
+          checked: false
+        });
+      }
+      return data;
+    },
+    addRecord: function() {
+      this.data.splice(this.addIdx, 0, {
+        id: ++this.count,
+        name: namegen.generateName(4, 8),
+        details: strings[this.count % 3],
+        image: this.count % 4,
+        value: 0,
+        type: 0,
+        checked: false
+      });
+    },
+    deleteRecord: function() {
+      this.data.splice(this.deleteIdx, 1);
+    },
+    deleteSelection: function() {
+      var i, idx;
+      if (this.multi) {
+        if (this.selection.length) {
+          for (i=0; i<this.selection.length; i++) {
+            idx = this.data.indexOf(this.selection[i]);
+            this.data.splice(idx, 1);
+          }
+        }
+      } else {
+        idx = this.data.indexOf(this.selection);
+        this.data.splice(idx, 1);
+      }
+    },
+    clearSelection: function() {
+      this.$.list.clearSelection();
+    },
+    deleteAll: function() {
+      this.data.splice(0,this.data.length);
+      // this.data.length = 0;
+    },
+    deleteArray: function() {
+      this.data = null;
+    },
+    initArrayEmpty: function() {
+      this.data = [];
+    },
+    initArrayFull: function() {
+      this.data = this.generateData();
+    }
+  });
+})();  
+</script>
+</polymer-element>
+
+</body>
+</html>

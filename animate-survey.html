@@ -13,7 +13,7 @@
 <head>
 
     <title>UQ Library Survey</title>
-    <script src="https://www.polymer-project.org/components/platform/platform.js"></script>
+    <script src="https://www.polymer-project.org/components/webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="https://www.polymer-project.org/components/core-icons/av-icons.html">
     <link rel="import" href="https://www.polymer-project.org/components/core-icons/communication-icons.html">
     <link rel="import" href="https://www.polymer-project.org/components/core-icons/device-icons.html">
@@ -26,8 +26,9 @@
     <link href="https://www.polymer-project.org/components/core-animated-pages/core-animated-pages.html" rel="import">
     <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/slide-from-right.html" rel="import">
 
+    <link rel="import" href="https://www.polymer-project.org/components/core-label/core-label.html">
+
     <link href="https://www.polymer-project.org/components/paper-shadow/paper-shadow.html" rel="import">
-    <link href="https://www.polymer-project.org/components/paper-shadow/paper-shadow.css" rel="import">
 
 
     <link href="https://www.polymer-project.org/components/paper-button/paper-button.html" rel="import">
@@ -56,8 +57,8 @@
             background: white;
             font-size: 13px;
             color: #333;
-            height: 80%;
-            margin: 20px 16px 16px 16px;
+            height: 70%;
+            margin: 0px 16px 16px 16px;
             border-radius: 2px;
             padding: 10px 35px 20px 35px;
             width: 80%;
@@ -86,50 +87,27 @@
             height: 100%;
             color: white;
         }
-        paper-button[disabled] {
-            margin-top: 5px;
-        }
-        paper-button[autofocus] {
-            color: #3f51b5;
-        }
         paper-button.colored {
-            color: #3f51b5;
+          color: #4285f4;
         }
 
         paper-button[raised].colored {
-            background: #3f51b5;
-            color: #fff;
-        }
-
-        paper-button[raised].colored > a {
-            text-decoration: none;
-            background: #3f51b5;
-            color: #fff;
-        }
-
-        paper-button[raised].colored:hover {
-            background: #3949ab;
-            color: #fff;
+          background: #4285f4;
+          color: #fff;
         }
 
         paper-button.custom > core-icon {
-            margin-right: 4px;
+          margin-right: 4px;
         }
 
         paper-button.hover:hover {
-            background: #eee;
+          background: #eee;
         }
 
         paper-button.blue-ripple::shadow #ripple {
-            color: #303f9f;
+          color: #4285f4;
         }
-        paper-button[activated] {
-            background: #3f51b5;
-            color: #fff;
-        }
-        paper-button[activated]:hover {
-            background: #3949ab;
-        }
+
         paper-input.narrow {
             width: 150px;
         }
@@ -233,15 +211,22 @@
             width: 100%;
             padding: 25px 0;
         }
+
+        .controls {
+            position: absolute;
+            bottom: 16px;
+            width: 100%;
+        }
     </style>
 
 </head>
 <body unresolved>
-
+<div vertical layout>
+    <div center-justified>
 <core-animated-pages transitions="slide-from-right">
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
@@ -256,87 +241,57 @@
 
                         <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
                         </p>
-                        <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input>
-                        <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input>
-                        <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input>
-                    </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-button class="hover" label="More Info..." onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');"></paper-button></div>
-                            <div></div>
-                            <div>
-                                <paper-button class="hover" label="Decline" onclick="finish()"></paper-button>
-                                <paper-button class="hover" label="Accept" id="check" onclick="next()"></paper-button>
-                            </div>
-                            <!--<div></paper-fab><paper-fab id="check" icon="check" greyed onclick="next()"></paper-fab></div>-->
-
-                        </div>
+                        <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
+                        <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
+                        <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br>
+                        <paper-button class="hover" onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');">More Info...</paper-button>
                     </div>
                 </div>
 
                 <paper-toast id="toast1" text="It looks like you missed something - have you filled in all the fields?"></paper-toast>
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+                
+        </paper-shadow>
     </section>
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
                         <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
                         <p class="subtitle">Please tick the boxes that describe you:</p>
-                        <div horizontal layout>
-                            <paper-checkbox class="blue" id="undergrad"></paper-checkbox>
-                            <div vertical layout>
-                                <h4>Undergraduate Coursework student</h4>
-                            </div>
-                        </div>
 
-                        <div horizontal layout>
-                            <paper-checkbox class="blue" id="phd"></paper-checkbox>
-                            <div vertical layout>
-                                <h4>PhD Researcher</h4>
-                            </div>
-                        </div>
+                        <core-label center horizontal layout>
+                          <paper-checkbox id="undergrad" for></paper-checkbox>
+                          <div flex><b>Undergraduate Coursework student</b></div>
+                        </core-label>
 
-                        <div horizontal layout>
-                            <paper-checkbox class="blue" id="teaching"></paper-checkbox>
-                            <div vertical layout>
-                                <h4>Academic Teaching &amp; Research Staff</h4>
-                            </div>
-                        </div>
+                        <core-label center horizontal layout>
+                          <paper-checkbox id="phd" for></paper-checkbox>
+                          <div flex><b>PhD Researcher</b></div>
+                        </core-label>
 
-                        <div right horizontal layout>
-                            <paper-checkbox class="blue" id="teaching-research"></paper-checkbox>
-                            <div vertical layout>
-                                <h4>Academic Research Staff</h4>
-                            </div>
-                        </div>
+                        <core-label center horizontal layout>
+                          <paper-checkbox id="teaching" for></paper-checkbox>
+                          <div flex><b>Academic Teaching &amp; Research Staff</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox id="teaching-research" for></paper-checkbox>
+                          <div flex><b>Academic Research Staff</b></div>
+                        </core-label>
 
                         <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
                     </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <!--<paper-button disabled class="count" label="x of x"></paper-button>-->
-                            <div flex><paper-progress value="1" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" class="forward-button" showing onclick="next()"></paper-fab></div>
-
-                        </div>
-                    </div>
                 </div>
-
-
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+                </paper-shadow>
     </section>
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
@@ -346,26 +301,16 @@
                         <h2 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> How easily can you use and navigate UQ Library's website?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                         <paper-input floatingLabel multiline label="Any frustrations with UQ Library website?" id="what-frustrated"></paper-input><br>
-                        <paper-input floatingLabel multiline label="3 recent search terms" value="1. &#13;2. &#13;3. " id="past-terms"></paper-input>
-                    </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
-                            <div flex><paper-progress value="2" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
-
-                        </div>
+                        <paper-input floatingLabel multiline label="3 recent search terms" id="past-terms"></paper-input>
                     </div>
                 </div>
 
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+                </paper-shadow>
     </section>
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
@@ -381,24 +326,14 @@
                         <h3>smartphone?</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                     </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
-                            <div flex><paper-progress value="3" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
-
-                        </div>
-                    </div>
                 </div>
 
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+                </paper-shadow>
     </section>
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
@@ -415,25 +350,15 @@
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                         <paper-input floatingLabel label="other..." id="access-from-other"></paper-input>
                     </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
-                            <div flex><paper-progress value="4" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
-
-                        </div>
-                    </div>
                 </div>
 
 
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+                </paper-shadow>
     </section>
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
@@ -445,70 +370,35 @@
                         <h3 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h3><p class="subtitle">(based on your peers, professors, recent library history, etc)</p>
                         <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
                     </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <!--<div><paper-button disabled class="count" label="x of x"></paper-button></div>-->
-                            <div flex><paper-progress value="5" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing class="forward-button" onclick="next()"></paper-fab></div>
-                        </div>
-                    </div>
                 </div>
 
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
+               </paper-shadow>
     </section>
-
-<!--
-    <section>
-        <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
-
-                <div left vertical layout style="height:100%">
-                    <div></div>
-                    <div flex>
-                        <h2>[Placeholder]</h2>
-                    </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-button disabled class="count" label="6 of 7"></paper-button></div>
-                            <div><paper-fab mini icon="arrow-forward" showing onclick="next()"></paper-fab></div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <paper-shadow z="3"></paper-shadow></div>
-        </div>
-    </section>
--->
-
 
     <section>
         <div layout vertical center center-justified style="background:#f0f0f0;">
-            <div class="card">
+            <paper-shadow class="card" z="2" animated>
 
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
                         <h2>You've reached the end of the survey. Thank you.</h2>
                     </div>
-                    <div>
-                        <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
-                            <div><paper-fab mini icon="undo" showing class="reset-button" onclick="reset()"></paper-fab></div>
-                            <div><paper-fab mini icon="check" showing class="finish-button" onclick="getData()"></paper-fab></div>
-                        </div>
-                    </div>
                 </div>
 
-                <paper-shadow z="2"></paper-shadow></div>
-        </div>
+                </paper-shadow>
     </section>
 </core-animated-pages>
-
+</div>
+                    <div class="controls">
+                        <div layout horizontal justified>
+                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <!--<paper-button disabled class="count" label="x of x"></paper-button>-->
+                            <div flex><paper-progress value="{{p}}" min="0" max="7"></paper-progress></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="next-button" id="check" onclick="next()"></paper-fab></div>
+                            <!-- <div><paper-fab mini icon="check" class="finish-button" onclick="getData()"></paper-fab></div> -->
+                        </div>
+                    </div>
 <script>
     var p = document.querySelector('core-animated-pages');
     var up = true;
@@ -522,6 +412,9 @@
         if (p.selected <= (max - 1)) {
             p.selected++;
             setPageNumbers();
+        }
+        if (p.selected == (max)) {
+            getData();
         }
     }
 

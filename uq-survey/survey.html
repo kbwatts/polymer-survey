@@ -1,0 +1,161 @@
+
+<!doctype html>
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<html>
+<head>
+  <title>Survey</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <script src="https://www.polymer-project.org/components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="https://www.polymer-project.org/components/core-scroll-header-panel/core-scroll-header-panel.html">
+  <link href="https://www.polymer-project.org/components/core-animated-pages/core-animated-pages.html" rel="import">
+  <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+  <link rel="import" href="https://www.polymer-project.org/components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-media-query/core-media-query.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-icon-button/core-icon-button.html">
+  <link href="https://www.polymer-project.org/components/paper-shadow/paper-shadow.html" rel="import">
+  <link href="https://www.polymer-project.org/components/font-roboto/roboto.html" rel="import">
+  <link href="https://www.polymer-project.org/components/core-icons/core-icons.html" rel="import">
+  <link href="https://www.polymer-project.org/components/paper-fab/paper-fab.html" rel="import">
+
+  <style>
+      body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      font-size: 14px;
+      margin: 0;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+
+    section {
+      padding: 20px 0;
+    }
+
+    section > div {
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    .card {
+      display: inline-block;
+      background: white;
+      box-sizing: border-box;
+      /*width: 100%;*/
+      height: 80%;
+      margin: 16px;
+      padding: 16px;
+      border-radius: 2px;
+    }
+
+    /*.fab {
+      display: inline-block;
+      background: white;
+      box-sizing: border-box;
+      width: 56px;
+      height: 56px;
+      margin: 16px;
+      padding: 16px;
+      border-radius: 50%;
+      text-align: center;
+    }*/
+
+    paper-fab {
+      color: #fff;
+      margin-right:2em;
+      margin-left:2em;
+    }
+
+    paper-fab.blue {
+      background: #5677fc;
+    }
+
+    paper-fab.green {
+      background: #259b24;
+    }
+
+    paper-fab.grey {
+      background: #9E9E9E;
+    }
+    paper-fab.light-grey {
+      background: #BDBDBD;
+    }
+
+  </style>
+    
+</head>
+<body unresolved>
+
+<core-toolbar>
+    <core-icon-button icon="menu"></core-icon-button>
+    <span flex>UQ Participant Survey</span>
+    <core-icon-button icon="refresh"></core-icon-button>
+    <core-icon-button icon="add"></core-icon-button>
+  </core-toolbar>
+
+<template is="auto-binding">
+
+  <div vertical layout>
+  
+
+  </div>
+  <div flex>
+    <div horizontal layout center-justified>
+    <section on-tap="{{tapAction}}">
+    <paper-shadow class="card" z="2" animated>
+      <h1>UQ Library Participant Consent</h1>
+
+I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.
+
+I understand that other University of Queensland employees involved with UQ Library may review these usability notes and recordings, and that I may be directly quoted or have recordings of my interactions used in internal University of Queensland documents, without reference to my name.
+
+I understand that my participation is voluntary, that I can choose not to participate in part or all of the project, and that I can withdraw at any stage of the project without being penalised or disadvantaged in any way. However, if I choose to withdraw before completing all phases of the research, my information from previous stages may be analysed in the combined data.
+
+I understand that any usability notes, my name, address, phone number and e-mail address will not be shared with external third parties in compliance with the University of Queensland Privacy Policy published at http://www.uq.edu.au/terms-of-use/.
+
+This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
+    </paper-shadow>
+  </section>
+</div>
+  </div>
+
+  <div>
+    <div horizontal layout justified>
+    <div><paper-fab icon="arrow-back" class="light-grey" title="arrow-back"></paper-fab></div>
+    <div></div>
+    <div><paper-fab icon="arrow-forward" class="grey" title="arrow-forward"></paper-fab></div>
+  </div>
+  </div>
+</div>
+<div>
+</template>
+
+<script>
+
+  var scope = document.querySelector('template[is=auto-binding]');
+
+  scope.tapAction = function(e) {
+    var target = e.target;
+    if (!target.down) {
+      target.setZ(target.z + 1);
+      if (target.z === 5) {
+        target.down = true;
+      }
+    } else {
+      target.setZ(target.z - 1);
+      if (target.z === 0) {
+        target.down = false;
+      }
+    }
+  };
+
+</script>
+
+</body>
+</html>
