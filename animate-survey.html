@@ -57,11 +57,11 @@
             background: white;
             font-size: 13px;
             color: #333;
-            height: 70%;
+            height: 480px;
             margin: 0px 16px 16px 16px;
             border-radius: 2px;
             padding: 10px 35px 20px 35px;
-            width: 80%;
+            width: auto;
         }
 
         .card > h1 {
@@ -160,6 +160,12 @@
             -webkit-transform: none;
             transform: none;
         }
+        paper-fab.grey {
+          background: #9E9E9E;
+        }
+        paper-fab.light-grey {
+          background: #BDBDBD;
+        }
         paper-checkbox {
             padding: 20px 20px 20px 0;
         }
@@ -228,19 +234,16 @@
         <div layout vertical center center-justified style="background:#f0f0f0;">
             <paper-shadow class="card" z="2" animated>
 
-                <div left vertical layout style="height:100%">
+                <div left vertical layout style="height:auto">
                     <div></div>
                     <div flex>
                         <h1>UQ Library Participant Consent</h1>
                         <p>I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.</p>
-                        <p>I understand that other University of Queensland employees involved with UQ Library may review these usability notes and recordings, and that I may be directly quoted or have recordings of my interactions used in internal University of Queensland documents, without reference to my name.</p>
 
-                        <p>I understand that my participation is voluntary, that I can choose not to participate in part or all of the project, and that I can withdraw at any stage of the project without being penalised or disadvantaged in any way. However, if I choose to withdraw before completing all phases of the research, my information from previous stages may be analysed in the combined data.</p>
+                        <p>No personal information will be shared with external third parties in compliance with the University of Queensland Privacy Policy.</p>
 
-                        <p>I understand that any usability notes, my name, address, phone number and e-mail address will not be shared with external third parties in compliance with the University of Queensland Privacy Policy published at http://www.uq.edu.au/terms-of-use/.</p>
+                        <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.</p>
 
-                        <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.
-                        </p>
                         <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
                         <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
                         <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br>
@@ -264,22 +267,22 @@
                         <p class="subtitle">Please tick the boxes that describe you:</p>
 
                         <core-label center horizontal layout>
-                          <paper-checkbox id="undergrad" for></paper-checkbox>
+                          <paper-checkbox class="blue" id="undergrad" for></paper-checkbox>
                           <div flex><b>Undergraduate Coursework student</b></div>
                         </core-label>
 
                         <core-label center horizontal layout>
-                          <paper-checkbox id="phd" for></paper-checkbox>
+                          <paper-checkbox class="blue" id="phd" for></paper-checkbox>
                           <div flex><b>PhD Researcher</b></div>
                         </core-label>
 
                         <core-label center horizontal layout>
-                          <paper-checkbox id="teaching" for></paper-checkbox>
+                          <paper-checkbox class="blue" id="teaching" for></paper-checkbox>
                           <div flex><b>Academic Teaching &amp; Research Staff</b></div>
                         </core-label>
 
                         <core-label center horizontal layout>
-                          <paper-checkbox id="teaching-research" for></paper-checkbox>
+                          <paper-checkbox class="blue" id="teaching-research" for></paper-checkbox>
                           <div flex><b>Academic Research Staff</b></div>
                         </core-label>
 
@@ -392,11 +395,10 @@
 </div>
                     <div class="controls">
                         <div layout horizontal justified>
-                            <div><paper-fab mini icon="arrow-back" showing class="back-button" onclick="back()"></paper-fab></div>
+                            <div><paper-fab mini icon="arrow-back" showing id="go-back" class="back-button" onclick="back()"></paper-fab></div>
                             <!--<paper-button disabled class="count" label="x of x"></paper-button>-->
-                            <div flex><paper-progress value="{{p}}" min="0" max="7"></paper-progress></div>
-                            <div><paper-fab mini icon="arrow-forward" showing class="next-button" id="check" onclick="next()"></paper-fab></div>
-                            <!-- <div><paper-fab mini icon="check" class="finish-button" onclick="getData()"></paper-fab></div> -->
+                            <div flex><paper-progress value="p" min="0" max="max"></paper-progress></div>
+                            <div><paper-fab mini icon="arrow-forward" showing class="next-button" id="check" onclick="next()"></paper-fab><paper-fab mini icon="check" hidden class="finish-button" id="get-data" onclick="getData()"></paper-fab></div>
                         </div>
                     </div>
 <script>
@@ -414,11 +416,35 @@
             setPageNumbers();
         }
         if (p.selected == (max)) {
-            getData();
+            showDataButton();
+            // getData();
         }
     }
 
+    function showDataButton() {
+        document.querySelector('#check').removeAttribute('showing');
+
+        setTimeout(function(){
+        document.querySelector('#check').setAttribute('hidden', true);
+        document.querySelector('#get-data').removeAttribute('hidden');},800);
+
+        setTimeout(function(){document.querySelector('#get-data').setAttribute('showing', true);},900);
+    }
+
+    function hideDataButton() {
+        document.querySelector('#get-data').removeAttribute('showing');
+
+        setTimeout(function(){
+        document.querySelector('#get-data').setAttribute('hidden', true);
+        document.querySelector('#check').removeAttribute('hidden');},800);
+
+        setTimeout(function(){document.querySelector('#check').setAttribute('showing', true);},900);
+    }
+
     function back() {
+        if (p.selected == max) {
+            hideDataButton();
+        }
         if (p.selected > 0) {
             p.selected--;
             setPageNumbers();
@@ -426,15 +452,9 @@
     }
 
     function setPageNumbers() {
-        var progress = document.getElementsByTagName("paper-progress");
-        for (var a=0; a < progress.length; a++) {
-            progress[a].max = max;
-            progress[a].value = p.selected;
-        }
-//        var pages = document.getElementsByClassName("count");
-//        for (var a=0; a < pages.length; a++) {
-//            pages[a].label = p.selected + " of " + max;
-//        }
+        var progress = document.querySelector("paper-progress");
+            progress.max = max;
+            progress.value = p.selected;
     }
 
     // sets date to today's date
@@ -463,19 +483,22 @@
     }
 
     // Developer mode - allows keyboard navigation
-    document.onkeydown = checkKey;
-    function checkKey(e) {
+    var devmode=true;
+    if (devmode==true) {
+        document.onkeydown = checkKey;
+        function checkKey(e) {
 
-        e = e || window.event;
-        console.log("p.selected = " + p.selected);
+            e = e || window.event;
+            console.log("p.selected = " + p.selected);
 
-        if (((e.keyCode == '37') || (e.keyCode == '40')) && p.selected > 0) {
-            p.selected -= 1;
+            if (((e.keyCode == '37') || (e.keyCode == '40')) && p.selected > 0) {
+                p.selected -= 1;
+            }
+            else if (((e.keyCode == '38') || (e.keyCode == '39')) && p.selected <= (max-1)) {
+                p.selected += 1;
+            }
+            setPageNumbers();
         }
-        else if (((e.keyCode == '38') || (e.keyCode == '39')) && p.selected <= (max-1)) {
-            p.selected += 1;
-        }
-        setPageNumbers();
     }
     // End of Developer mode
 
@@ -556,10 +579,10 @@
 //        window.location = 'data:application/csv;charset=utf-8,'
 //        + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%2C' + 'Q2' + '%2C' + 'Q3' + '%2C' + 'Q4' + '%2C' + 'Q5' + '%2C' + 'Q6' + '%2C' + 'Q7' + '%2C' + 'Q8' + '%2C' + 'Q9' + '%2C' + 'Q10' + '%2C' + 'Q11' + '%2C' + 'Q12' + '%2C' + 'Q13' + '%2C' + 'Q14' + '%2C' + 'Other Values' + '%0A'
 //        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C' + rating3 + '%2C' + rating4 + '%2C' + rating5 + '%2C' + rating6 + '%2C' + rating7 + '%2C' + rating8 + '%2C' + rating9 + '%2C' + rating10 + '%2C' + rating11 + '%2C' + rating12 + '%2C' + rating13 + '%2C' + rating14 + '%2C' + other + '%2C';
-
+setTimeout(function(){
         window.location = 'data:application/csv;charset=utf-8,'
         + 'name' + '%2C' + 'email' + '%2C' + 'date' + '%2C' + 'type' + '%2C' + 'research' + '%2C' + 'frustrated' + '%2C' + 'past-terms' + '%2C' + 'Q1' + '%2C' + 'Q2' + '%0A'
-        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C';
+        + name + '%2C' + email + '%2C' + date + '%2C' + type + '%2C' + research + '%2C' + frustrated + '%2C' + past + '%2C' + rating1 + '%2C' + rating2 + '%2C';},300);
     }
 </script>
 </body>
