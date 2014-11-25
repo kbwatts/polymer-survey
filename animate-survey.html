@@ -62,6 +62,7 @@
             border-radius: 2px;
             padding: 10px 35px 20px 35px;
             width: auto;
+            top: -50px;
         }
 
         .card > h1 {
@@ -240,14 +241,14 @@
                         <h1>UQ Library Participant Consent</h1>
                         <p>I hereby grant full permission to the University of Queensland to take notes and recordings of my comments during this session.</p>
 
-                        <p>No personal information will be shared with external third parties in compliance with the University of Queensland Privacy Policy.</p>
+                        <p>No personal information will be shared with external third parties in compliance with the <a href="http://www.uq.edu.au/terms-of-use/">University of Queensland Privacy Policy</a>.</p>
 
                         <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.</p>
 
                         <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
                         <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
-                        <paper-input floatingLabel type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br>
-                        <paper-button class="hover" onclick="javascript:window.open('http://www.uq.edu.au/terms-of-use/');">More Info...</paper-button>
+                        <paper-input floatingLabel label="Today's date" type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br>
+                        <paper-button class="hover" onclick="setTimeout(function(){javascript:window.open('http://www.uq.edu.au/terms-of-use/');},300);">More Info...</paper-button>
                     </div>
                 </div>
 
@@ -264,14 +265,29 @@
                     <div></div>
                     <div flex>
                         <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
-                        <p class="subtitle">Please tick the boxes that describe you:</p>
+                        <p class="subtitle">Please select the item that describes you:</p>
 
                         <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="undergrad" for></paper-checkbox>
-                          <div flex><b>Undergraduate Coursework student</b></div>
+                          <paper-checkbox class="blue" id="ug1" for></paper-checkbox>
+                          <div flex><b>1st year undergraduate coursework student</b></div>
                         </core-label>
 
                         <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="ug2" for></paper-checkbox>
+                          <div flex><b>2nd year undergraduate coursework student</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="ug3-plus" for></paper-checkbox>
+                          <div flex><b>3rd+ year undergraduate coursework student</b></div>
+                        </core-label>
+
+                        <!-- <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="undergrad" for></paper-checkbox>
+                          <div flex><b>Undergraduate Coursework student</b></div>
+                        </core-label> -->
+
+                        <!-- <core-label center horizontal layout>
                           <paper-checkbox class="blue" id="phd" for></paper-checkbox>
                           <div flex><b>PhD Researcher</b></div>
                         </core-label>
@@ -284,9 +300,9 @@
                         <core-label center horizontal layout>
                           <paper-checkbox class="blue" id="teaching-research" for></paper-checkbox>
                           <div flex><b>Academic Research Staff</b></div>
-                        </core-label>
+                        </core-label> -->
 
-                        <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input>
+                        <paper-input floatingLabel label="Other (please describe)" id="type-other"></paper-input>
                     </div>
                 </div>
                 </paper-shadow>
@@ -299,12 +315,151 @@
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
-                        <h2 class="no-bottom-margin"><core-icon icon="accessibility"></core-icon> How easily can you use and navigate the web?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <p class="subtitle">Which faculty are you currently studying with?</p>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-arts" for></paper-checkbox>
+                          <div flex><b>Arts</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-business" for></paper-checkbox>
+                          <div flex><b>Business, Economics, &amp; Law</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-eait" for></paper-checkbox>
+                          <div flex><b>Engineering, Architecture, &amp; Information Technology</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-health-sci" for></paper-checkbox>
+                          <div flex><b>Health Sciences</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-science" for></paper-checkbox>
+                          <div flex><b>Science</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="faculty-social-sci" for></paper-checkbox>
+                          <div flex><b>Social &amp; Behavioural Sciences</b></div>
+                        </core-label>
+
+                        <paper-input floatingLabel label="Other (please describe)" id="faculty-other"></paper-input>
+                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
+                    </div>
+                </div>
+                </paper-shadow>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <p class="subtitle">Which UQ campus is your main campus?</p>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-st-lucia" for></paper-checkbox>
+                          <div flex><b>St Lucia</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-ipswitch" for></paper-checkbox>
+                          <div flex><b>Ipswitch</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-gatton" for></paper-checkbox>
+                          <div flex><b>Gatton</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-herston" for></paper-checkbox>
+                          <div flex><b>Herston</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-pace" for></paper-checkbox>
+                          <div flex><b>PACE</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="campus-pah" for></paper-checkbox>
+                          <div flex><b>Princess Alexandria Hospital</b></div>
+                        </core-label>
+
+                        <paper-input floatingLabel label="Other (please describe)" id="campus-other"></paper-input>
+                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
+                    </div>
+                </div>
+                </paper-shadow>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <p class="subtitle">Are you...</p>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="international" for></paper-checkbox>
+                          <div flex><b>an international student?</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="external" for></paper-checkbox>
+                          <div flex><b>an external student?</b></div>
+                        </core-label>
+
+                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
+                    </div>
+                </div>
+                </paper-shadow>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <p class="subtitle">In relation to your online information use for your university studies, please rate the following. 0 is strongly disagree, 10 is strongly agree. 5 is in the middle/not sure.</p><br>
+                        <h3 class="no-bottom-margin"><core-icon icon="accessibility"></core-icon> Overall, I feel confident and competent to access the information resources I need.</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                        <h2 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> How easily can you use and navigate UQ Library's website?</h2><p class="subtitle">Where 0 is extremely difficult and 10 is effortless.</p>
+                        <h3 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> Overall, I feel confident and competent to evaluate the information resources I need.</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                        <paper-input floatingLabel multiline label="Any frustrations with UQ Library website?" id="what-frustrated"></paper-input><br>
-                        <paper-input floatingLabel multiline label="3 recent search terms" id="past-terms"></paper-input>
+                        <paper-input floatingLabel multiline label="Please provide an explanation for your reponses" id="explanation1"></paper-input>
+                        <!-- <paper-input floatingLabel multiline label="Any frustrations with UQ Library website?" id="what-frustrated"></paper-input><br>
+                        <paper-input floatingLabel multiline label="3 recent search terms" id="past-terms"></paper-input> -->
+                    </div>
+                </div>
+
+                </paper-shadow>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <h3 class="no-bottom-margin">Where do you normally access the UQ Library website? (e.g. home/uni PC)</h3>
+                        <paper-input floatingLabel label="Where do you normally access the UQ Library website? (e.g. home/uni PC)" id="where-access"></paper-input>
+                        <paper-input floatingLabel label="Are some parts of the website easier to use/understand than others?" id="what-was-easy"></paper-input>
                     </div>
                 </div>
 
