@@ -438,6 +438,7 @@
                         <h3 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> Overall, I feel confident and competent to evaluate the information resources I need.</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                         <paper-input floatingLabel multiline label="Please provide an explanation for your reponses" id="explanation1"></paper-input>
+                        <paper-input floatingLabel label="Are some parts of the website easier to use/understand than others?" id="what-was-easy"></paper-input>
                     </div>
                 </div>
 
@@ -468,7 +469,6 @@
                         </core-label>
                         
                         <paper-input floatingLabel label="Other (please describe)" id="use-location-other"></paper-input>
-                        <paper-input floatingLabel label="Are some parts of the website easier to use/understand than others?" id="what-was-easy"></paper-input>
                     </div>
                 </div>
 
@@ -489,6 +489,27 @@
                         <paper-input floatingLabel label="1st term(s)" id="example-search-term-1"></paper-input>
                         <paper-input floatingLabel label="2nd term(s)" id="example-search-term-2"></paper-input>
                         <paper-input floatingLabel label="3rd term(s)" id="example-search-term-3"></paper-input>
+                    </div>
+                </div>
+
+                </paper-shadow>
+                </div>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="wallet-giftcard"></core-icon> Gift Card details</h1>
+                        <h3 class="no-bottom-margin">Please enter your gift card details here:</h3>
+                        
+                        <paper-input floatingLabel label="Card Number" id="gift-card-number"></paper-input>
+                        <paper-input floatingLabel label="Access Pin" id="gift-card-pin"></paper-input>
+                        <paper-input floatingLabel label="Ref No." id="gift-card-ref"></paper-input>
+                        <paper-input floatingLabel label="Serial" id="gift-card-serial"></paper-input>
                     </div>
                 </div>
 
@@ -774,7 +795,7 @@
         var encodedUri = encodeURI(csvContent);
         var link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "participant-response" + today + time + ".csv");
+        link.setAttribute("download", "participant-response" + name + today + time + ".csv");
 
         link.click();
     }
