@@ -263,7 +263,7 @@
 
                         <paper-input floatingLabel class="first-page" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
                         <paper-input floatingLabel class="first-page" label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
-                        <paper-input floatingLabel class="first-page" label="Today's date" type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br><br><br><br><br><br><br>
+                        <paper-input floatingLabel class="first-page" label="Today's date" type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br><br><br><br><br><br><br><br><br>
                     <div horizontal layout>
                         <div><paper-button class="hover" onclick="setTimeout(function(){javascript:window.open('http://www.uq.edu.au/terms-of-use/');},300);">More Info...</paper-button></div>
                         <div flex></div>
@@ -485,18 +485,6 @@
                     <div flex>
                         <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
                         <h3 class="no-bottom-margin">What did you want to know or find recently? Try to think of 3 specific terms you've searched for recently (related to your academic career)...</h3>
-                         <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="use-at-home" for></paper-checkbox>
-                          <div flex><b>Home</b></div>
-                        </core-label>
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="use-at-university" for></paper-checkbox>
-                          <div flex><b>University</b></div>
-                        </core-label>
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="use-in-transit" for></paper-checkbox>
-                          <div flex><b>In transit</b></div>
-                        </core-label>
                         
                         <paper-input floatingLabel label="1st term(s)" id="example-search-term-1"></paper-input>
                         <paper-input floatingLabel label="2nd term(s)" id="example-search-term-2"></paper-input>
@@ -753,7 +741,7 @@
         while (radioCounter < listOfRadios.length) {
             responses[globalCounter] = { question: listOfRadios[radioCounter].id, response: listOfRadios[radioCounter].selected };
             globalCounter++;
-            checkboxCounter++;
+            radioCounter++;
         }
 
         var listOfCheckboxes = document.getElementsByTagName('paper-checkbox');
