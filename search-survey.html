@@ -41,6 +41,8 @@
 
     <link rel="import" href="https://www.polymer-project.org/components/paper-checkbox/paper-checkbox.html">
 
+    <link rel="import" href="https://www.polymer-project.org/components/paper-radio-group/paper-radio-group.html">
+
     <link rel="import" href="https://www.polymer-project.org/components/paper-slider/paper-slider.html">
 
     <link rel="import" href="https://www.polymer-project.org/components/paper-toast/paper-toast.html">
@@ -112,11 +114,14 @@
         paper-input.narrow {
             width: 150px;
         }
-        paper-input {
+        paper-input.first-page {
             width: 100%;
             max-width: 400px;
         }
-
+        paper-input {
+            width: 100%;
+        }
+        
         paper-fab {
             margin-top: 7px;
             color: #fff;
@@ -224,6 +229,17 @@
             bottom: 16px;
             width: 100%;
         }
+        paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+          color: #4285f4;
+        }
+        
+        paper-radio-group.blue paper-radio-button::shadow #onRadio {
+          background-color: #4285f4;
+        }
+        
+        paper-radio-button {
+          display: block;
+        }
     </style>
 
 </head>
@@ -245,9 +261,9 @@
 
                         <p>This consent and waiver will not be made the basis of a future claim of any kind against the University of Queensland and any of its agencies.</p>
 
-                        <paper-input floatingLabel class="green" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
-                        <paper-input floatingLabel label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
-                        <paper-input floatingLabel label="Today's date" type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br>
+                        <paper-input floatingLabel class="first-page" label="Your name" error="Please enter your name!" id="name" onchange="validate()"></paper-input><br>
+                        <paper-input floatingLabel class="first-page" label="Your email address" type="email" error="Please enter your contact email address!" id="email" onchange="validate()"></paper-input><br>
+                        <paper-input floatingLabel class="first-page" label="Today's date" type="date" error="Please enter today's date!" id="date" onchange="validate()"></paper-input><br><br><br><br><br><br><br><br>
                     <div horizontal layout>
                         <div><paper-button class="hover" onclick="setTimeout(function(){javascript:window.open('http://www.uq.edu.au/terms-of-use/');},300);">More Info...</paper-button></div>
                         <div flex></div>
@@ -276,42 +292,39 @@
                         <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
                         <p class="subtitle">Please select the item that describes you:</p>
 
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="ug1" for></paper-checkbox>
-                          <div flex><b>1st year undergraduate coursework student</b></div>
-                        </core-label>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="ug2" for></paper-checkbox>
-                          <div flex><b>2nd year undergraduate coursework student</b></div>
-                        </core-label>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="ug3-plus" for></paper-checkbox>
-                          <div flex><b>3rd+ year undergraduate coursework student</b></div>
-                        </core-label>
-
-                        <!-- <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="undergrad" for></paper-checkbox>
-                          <div flex><b>Undergraduate Coursework student</b></div>
-                        </core-label> -->
-
-                        <!-- <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="phd" for></paper-checkbox>
-                          <div flex><b>PhD Researcher</b></div>
-                        </core-label>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="teaching" for></paper-checkbox>
-                          <div flex><b>Academic Teaching &amp; Research Staff</b></div>
-                        </core-label>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="teaching-research" for></paper-checkbox>
-                          <div flex><b>Academic Research Staff</b></div>
-                        </core-label> -->
+                            <paper-radio-group class="blue" selected="ug1">
+                              <paper-radio-button name="ug1" label="1st year undergraduate"></paper-radio-button>
+                              <paper-radio-button name="ug2" label="2nd year undergraduate"></paper-radio-button>
+                              <paper-radio-button name="ug3" label="3rd year undergraduate"></paper-radio-button>
+                              <paper-radio-button name="ug4-plus" label="4th year undergraduate or higher"></paper-radio-button>
+                            </paper-radio-group>
 
                         <paper-input floatingLabel label="Other (please describe)" id="type-other"></paper-input>
+                    </div>
+                </div>
+                </paper-shadow>
+                </div>
+    </section>
+
+    <section>
+        <div layout vertical center center-justified style="background:#f0f0f0;">
+            <paper-shadow class="card" z="2" animated>
+
+                <div left vertical layout style="height:100%">
+                    <div></div>
+                    <div flex>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <p class="subtitle">Are you...</p>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="international" for></paper-checkbox>
+                          <div flex><b>an international student?</b></div>
+                        </core-label>
+
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="external" for></paper-checkbox>
+                          <div flex><b>an external student?</b></div>
+                        </core-label>
                     </div>
                 </div>
                 </paper-shadow>
@@ -359,7 +372,6 @@
                         </core-label>
 
                         <paper-input floatingLabel label="Other (please describe)" id="faculty-other"></paper-input>
-                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
                     </div>
                 </div>
                 </paper-shadow>
@@ -407,34 +419,6 @@
                         </core-label>
 
                         <paper-input floatingLabel label="Other (please describe)" id="campus-other"></paper-input>
-                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
-                    </div>
-                </div>
-                </paper-shadow>
-                </div>
-    </section>
-
-    <section>
-        <div layout vertical center center-justified style="background:#f0f0f0;">
-            <paper-shadow class="card" z="2" animated>
-
-                <div left vertical layout style="height:100%">
-                    <div></div>
-                    <div flex>
-                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
-                        <p class="subtitle">Are you...</p>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="international" for></paper-checkbox>
-                          <div flex><b>an international student?</b></div>
-                        </core-label>
-
-                        <core-label center horizontal layout>
-                          <paper-checkbox class="blue" id="external" for></paper-checkbox>
-                          <div flex><b>an external student?</b></div>
-                        </core-label>
-
-                        <!-- <paper-input floatingLabel label="Your field, specialty, or area of research" id="research-area"></paper-input> -->
                     </div>
                 </div>
                 </paper-shadow>
@@ -454,8 +438,6 @@
                         <h3 class="no-bottom-margin"><core-icon icon="hardware:desktop-mac"></core-icon> Overall, I feel confident and competent to evaluate the information resources I need.</h3>
                         <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
                         <paper-input floatingLabel multiline label="Please provide an explanation for your reponses" id="explanation1"></paper-input>
-                        <!-- <paper-input floatingLabel multiline label="Any frustrations with UQ Library website?" id="what-frustrated"></paper-input><br>
-                        <paper-input floatingLabel multiline label="3 recent search terms" id="past-terms"></paper-input> -->
                     </div>
                 </div>
 
@@ -471,8 +453,21 @@
                     <div></div>
                     <div flex>
                         <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
-                        <h3 class="no-bottom-margin">Where do you normally access the UQ Library website? (e.g. home/uni PC)</h3>
-                        <paper-input floatingLabel label="Where do you normally access the UQ Library website? (e.g. home/uni PC)" id="where-access"></paper-input>
+                        <h3 class="no-bottom-margin">Where do you normally access the UQ Library website?</h3>
+                         <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-at-home" for></paper-checkbox>
+                          <div flex><b>Home</b></div>
+                        </core-label>
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-at-university" for></paper-checkbox>
+                          <div flex><b>University</b></div>
+                        </core-label>
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-in-transit" for></paper-checkbox>
+                          <div flex><b>In transit</b></div>
+                        </core-label>
+                        
+                        <paper-input floatingLabel label="Other (please describe)" id="use-location-other"></paper-input>
                         <paper-input floatingLabel label="Are some parts of the website easier to use/understand than others?" id="what-was-easy"></paper-input>
                     </div>
                 </div>
@@ -488,67 +483,29 @@
                 <div left vertical layout style="height:100%">
                     <div></div>
                     <div flex>
-                        <div><h2 class="no-bottom-margin"><core-icon icon="hardware:phonelink"></core-icon> How often do you access the UQ Library website using a...</h2><p class="subtitle">Where 0 is never and 10 is daily or more.</p></div>
-
-                        <h3>desktop or laptop?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                        <h3>tablet?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                        <h3>smartphone?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
+                        <h1 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon> A little bit about you...</h1>
+                        <h3 class="no-bottom-margin">What did you want to know or find recently? Try to think of 3 specific terms you've searched for recently (related to your academic career)...</h3>
+                         <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-at-home" for></paper-checkbox>
+                          <div flex><b>Home</b></div>
+                        </core-label>
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-at-university" for></paper-checkbox>
+                          <div flex><b>University</b></div>
+                        </core-label>
+                        <core-label center horizontal layout>
+                          <paper-checkbox class="blue" id="use-in-transit" for></paper-checkbox>
+                          <div flex><b>In transit</b></div>
+                        </core-label>
+                        
+                        <paper-input floatingLabel label="1st term(s)" id="example-search-term-1"></paper-input>
+                        <paper-input floatingLabel label="2nd term(s)" id="example-search-term-2"></paper-input>
+                        <paper-input floatingLabel label="3rd term(s)" id="example-search-term-3"></paper-input>
                     </div>
                 </div>
 
                 </paper-shadow>
                 </div>
-    </section>
-
-    <section>
-        <div layout vertical center center-justified style="background:#f0f0f0;">
-            <paper-shadow class="card" z="2" animated>
-
-                <div left vertical layout style="height:100%">
-                    <div></div>
-                    <div flex>
-                        <div><h2 class="no-bottom-margin"><core-icon icon="maps:place"></core-icon> How often do you access the UQ Library website from...</h2><p class="subtitle">Where 0 is never and 10 is daily.</p></div>
-
-                        <h3>on campus?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                        <h3>in transit?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-
-                        <h3>at home?</h3>
-                        <paper-slider snaps pin value="5" max="10" editable id="ratingx"></paper-slider>
-                        <paper-input floatingLabel label="other..." id="access-from-other"></paper-input>
-                    </div>
-                </div>
-
-
-                </paper-shadow>
-                </div>
-    </section>
-
-    <section>
-        <div layout vertical center center-justified style="background:#f0f0f0;">
-            <paper-shadow class="card" z="2" animated>
-
-                <div left vertical layout style="height:100%">
-                    <div></div>
-                    <div flex>
-                        <h2>Please rate how useful the following UQ Library features are to you.</h2>
-                        <h3 class="no-bottom-margin"><core-icon icon="search"></core-icon>Library academic content</h3><p class="subtitle">(e.g. peer-reviewed articles, books, journals, databases, etc)</p>
-                        <paper-slider snaps pin value="5" max="10" editable id="rating1"></paper-slider>
-                        <br>
-                        <h3 class="no-bottom-margin"><core-icon icon="account-circle"></core-icon>Recommended or personalised library academic content</h3><p class="subtitle">(based on your peers, professors, recent library history, etc)</p>
-                        <paper-slider snaps pin value="5" max="10" editable id="rating2"></paper-slider>
-                    </div>
-                </div>
-
-               </paper-shadow>
-           </div>
     </section>
 
     <section>
@@ -579,7 +536,7 @@
                         </div>
                     </div>
 <script>
-    var devmode=true;
+    var devmode=false;
 
     var p = document.querySelector('core-animated-pages');
     var up = true;
@@ -628,6 +585,26 @@
             showDataButton();
             // getData();
         }
+    }
+
+    function hideCheck() {
+        document.querySelector('#check').removeAttribute('showing');
+        document.querySelector('#check').setAttribute('hidden', true);
+    }
+    function revealCheck() {
+        document.querySelector('#check').removeAttribute('hidden');
+        document.querySelector('#check').setAttribute('showing', true);
+        document.querySelector('#check').setAttribute('raised', 'true');
+    }
+
+    function hideData() {
+        document.querySelector('#get-data').removeAttribute('showing');
+        document.querySelector('#get-data').setAttribute('hidden', true);
+    }
+
+    function revealDataButton() {
+        document.querySelector('#get-data').removeAttribute('hidden');
+        document.querySelector('#get-data').setAttribute('showing', true);
     }
 
     function showDataButton() {
@@ -754,7 +731,7 @@
     function getData() {
 
         var globalCounter = 1;
-        var responses = {question: "question", response: "response"};
+        var responses = {question: "privacy-policy", response: "accepted"};
 
 
         var name = document.getElementById('name').value;
@@ -771,11 +748,19 @@
             inputCounter++;
         }
 
+        var listOfRadios = document.getElementsByTagName('paper-radio-group');
+        var radioCounter = 0;
+        while (radioCounter < listOfRadios.length) {
+            responses[globalCounter] = { question: listOfRadios[radioCounter].id, response: listOfRadios[radioCounter].selected };
+            globalCounter++;
+            checkboxCounter++;
+        }
+
         var listOfCheckboxes = document.getElementsByTagName('paper-checkbox');
         var checkboxCounter = 0;
         while (checkboxCounter < listOfCheckboxes.length) {
-            if (listOfCheckboxes[checkboxCounter].value) {
-                responses[globalCounter] = { question: listOfCheckboxes[checkboxCounter].id, response: listOfCheckboxes[checkboxCounter].value };
+            if (listOfCheckboxes[checkboxCounter].checked) {
+                responses[globalCounter] = { question: listOfCheckboxes[checkboxCounter].id, response: listOfCheckboxes[checkboxCounter].checked };
                 globalCounter++;
             }
             checkboxCounter++;
@@ -793,7 +778,7 @@
 
 
         var myJSONText = JSON.stringify(responses, null, '\t');
-        console.log(myJSONText);
+        // console.log(myJSONText);
         myJSONText = myJSONText.replace(/[{}]/g, "");
         myJSONText = myJSONText.replace(/['"]+/g, "");
         csvContent = "data:text/csv;charset=utf-8," + myJSONText;
