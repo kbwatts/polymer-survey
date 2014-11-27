@@ -12,10 +12,14 @@
 <html>
 <head>
 
+  <title>Simple Slideshow</title>
+
   <script src="https://www.polymer-project.org/components/webcomponentsjs/webcomponents.js"></script>
   <link href="https://www.polymer-project.org/components/core-animated-pages/core-animated-pages.html" rel="import">
-  <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/cross-fade.html" rel="import">
   <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+  <link href="https://www.polymer-project.org/components/core-icons/core-icons.html" rel="import">
+  <link href="https://www.polymer-project.org/components/paper-fab/paper-fab.html" rel="import">
+  <link rel="import" href="https://www.polymer-project.org/components/paper-progress/paper-progress.html">
 
   <style>
     body {
@@ -23,24 +27,50 @@
       margin: 0;
     }
 
-    select {
-      position: absolute;
-      bottom: 50px;
-    }
-
     core-animated-pages {
       position: absolute;
       top: 0;
       right: 0;
-      bottom: 50px;
+      bottom: 0px;
       left: 0;
       font-size: 72px;
       overflow: hidden;
     }
 
+    .controls {
+      position: absolute;
+      width: 100%;
+      bottom: 16px;
+    }
+
     section > div {
       height: 100%;
       color: white;
+    }
+    paper-fab {
+      color: #fff;
+      margin-right:2em;
+      margin-left:2em;
+    }
+
+    paper-fab.blue {
+      background: #5677fc;
+    }
+
+    paper-fab.green {
+      background: #259b24;
+    }
+
+    paper-fab.grey {
+      background: #9E9E9E;
+    }
+    paper-fab.light-grey {
+      background: #BDBDBD;
+    }
+    paper-progress {
+      display: block;
+      width: 100%;
+      padding: 25px 0;
     }
 
   </style>
@@ -49,58 +79,131 @@
 <body unresolved>
 
 
-  <core-animated-pages onclick="stuff();" transitions="cross-fade-all">
+  <core-animated-pages onclick="next();" transitions="slide-from-right">
     <section>
-      <div layout vertical center center-justified style="background:red;">
+      <div layout vertical center center-justified style="background:#1B5E20;">
         <div>1</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:blue;">
+      <div layout vertical center center-justified style="background:#2E7D32;">
         <div>2</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:purple;">
+      <div layout vertical center center-justified style="background:#388E3C;">
         <div>3</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:orange;">
+      <div layout vertical center center-justified style="background:#43A047;">
         <div>4</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:green;">
+      <div layout vertical center center-justified style="background:#4CAF50;">
         <div>5</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#66BB6A;">
+        <div>6</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#81C784;">
+        <div>7</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#A5D6A7;">
+        <div>8</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#C8E6C9;">
+        <div>9</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#E8F5E9;">
+        <div>10</div>
       </div>
     </section>
   </core-animated-pages>
 
-  <select onchange="change();">
-    <option value="cross-fade-all" selected>cross-fade-all</option>
-    <option value="slide-from-right">slide-from-right</option>
-  </select>
+  <div horizontal layout center-justified class="controls">
+      <div><paper-fab icon="arrow-back" class="light-grey" title="arrow-back" onclick="back()"></paper-fab></div>
+      <div flex><paper-progress></paper-progress></div>
+      <div><paper-fab icon="arrow-forward" class="grey" title="arrow-forward" onclick="next()"></paper-fab></div>
+  </div>
 
   <script>
-    function change() {
-      var s = document.querySelector('select');
-      document.querySelector('core-animated-pages').transitions = document.querySelector('select').options[s.selectedIndex].value;
+    var up = true;
+    var max = (document.getElementsByTagName('section').length - 1);
+    var currentPage = document.querySelector('core-animated-pages');
+
+    function updateProgress() {
+      startProgress();
     }
 
-    var up = true;
-    var max = 4;
-    function stuff() {
-      var p = document.querySelector('core-animated-pages');
-      if (up && p.selected === max || !up && p.selected === 0) {
-        up = !up;
-      }
-      if (up) {
-        p.selected += 1;
-      } else {
-        p.selected -= 1;
+    function next() {
+      if ((currentPage.selected) < max) {
+        currentPage.selected++;
+        updateProgress();
       }
     }
+
+    function back() {
+      if ((currentPage.selected) > 0) {
+        currentPage.selected--;
+        updateProgress();
+      }
+    }
+
+    document.onkeydown = checkKey;
+    function checkKey(e) {
+
+      e = e || window.event;
+
+      if (((e.keyCode == '37') || (e.keyCode == '46')) && currentPage.selected > 0) {
+          back();
+      }
+      else if (((e.keyCode == '13') || (e.keyCode == '32') || (e.keyCode == '39')) && currentPage.selected <= max) {
+          next();
+      }
+    }
+
+        var progress = document.querySelector('paper-progress');
+    // var button = document.querySelector('paper-button');
+    
+    var repeat, maxRepeat = 1, animating = false;
+    
+    function nextProgress() {
+      animating = true;
+      if (progress.value < (currentPage.selected+1)*10) {
+        progress.value += (progress.step || 1);
+      } else {
+        if (++repeat >= maxRepeat) {
+          animating = false;
+          return;
+        }
+        progress.value = progress.min;
+      }
+      progress.async(nextProgress);
+    }
+    
+    function startProgress() {
+      repeat = 0;
+      progress.value = ((currentPage.selected)*10);
+      if (!animating) {
+        nextProgress();
+      }
+    }
+    
+    addEventListener('polymer-ready', function() {
+      startProgress();
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<!doctype html>
+<html>
+<head>
+  <title>paper-tabs</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  
+  <script src="https://www.polymer-project.org/components/webcomponentsjs/webcomponents.js"></script>
+  
+  <link rel="import" href="https://www.polymer-project.org/components/core-icons/core-icons.html">
+  <link rel="import" href="https://www.polymer-project.org/components/font-roboto/roboto.html">
+  <link rel="import" href="https://www.polymer-project.org/components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="https://www.polymer-project.org/components/core-media-query/core-media-query.html">
+  <link rel="import" href="https://www.polymer-project.org/components/paper-icon-button/paper-icon-button.html">
+  
+  <style shim-shadowdom>
+  
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      margin: 0;
+      /*padding: 24px;*/
+      color: #333;
+    }
+    
+    body.core-narrow {
+      /*padding: 8px;*/
+    }
+    
+    paper-tabs, core-toolbar {
+      background-color: #00bcd4;
+      color: #fff;
+      box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    core-toolbar paper-tabs {
+      box-shadow: none;
+    }
+    
+    paper-tabs[noink][nobar] paper-tab.core-selected {
+      color: #ffff8d;
+    }
+    
+    paper-tabs.transparent-teal {
+      background-color: transparent;
+      color: #00bcd4;
+      box-shadow: none;
+    }
+    
+    paper-tabs.transparent-teal::shadow #selectionBar {
+      background-color: #00bcd4;
+    }
+    
+    paper-tabs.transparent-teal paper-tab::shadow #ink {
+      color: #00bcd4;
+    }
+    
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    
+  </style>
+  
+</head>
+<body unresolved>
+  
+  <core-toolbar class="medium-tall">
+  
+    <paper-icon-button icon="menu"></paper-icon-button>
+    <div flex>UQ Library Search</div>
+    <paper-icon-button icon="search"></paper-icon-button>
+    <paper-icon-button icon="more-vert"></paper-icon-button>
+    
+    <div class="bottom fit" horizontal layout>
+    
+      <paper-tabs selected="0" flex id="scrollableTabs" scrollable>
+    
+        <paper-tab>ALL</paper-tab>
+        <paper-tab>JOURNAL ARTICLES</paper-tab>
+        <paper-tab>BOOKS</paper-tab>
+        <paper-tab>MULTIMEDIA</paper-tab>
+        <paper-tab>JOURNALS</paper-tab>
+        <paper-tab>DATABASES</paper-tab>
+        <paper-tab>CATALOGUE</paper-tab>
+        <paper-tab>PAST EXAM PAPERS</paper-tab>
+        <paper-tab>COURSE READING LISTS</paper-tab>
+        
+      </paper-tabs>
+      
+    </div>
+  
+  </core-toolbar>
+  
+  <!-- detect when window is narrow -->
+  <core-media-query id="mediaQuery" query="max-width: 640px"></core-media-query>
+  
+  <script>
+  
+    document.querySelector('#mediaQuery').addEventListener('core-media-change',
+      function(e) {
+        document.body.classList.toggle('core-narrow', e.detail.matches);
+        document.querySelector('#scrollableTabs').updateBar();
+      });
+  
+  </script>
+  
+</body>
+</html>
