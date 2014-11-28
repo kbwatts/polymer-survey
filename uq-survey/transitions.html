@@ -192,12 +192,26 @@
       }
       progress.async(nextProgress);
     }
+
+    function previousProgress() {
+      animating = true;
+      if (progress.value > (currentPage.selected-1)*10) {
+        progress.value -= (progress.step || 1);
+      } else {
+        if (++repeat >= maxRepeat) {
+          animating = false;
+          return;
+        }
+        progress.value = progress.min;
+      }
+      progress.async(nextProgress);
+    }
     
     function startProgress() {
       repeat = 0;
       progress.value = ((currentPage.selected)*10);
       if (!animating) {
-        nextProgress();
+        previousProgress();
       }
     }
     
