@@ -81,61 +81,66 @@
 
   <core-animated-pages onclick="next();" transitions="slide-from-right">
     <section>
-      <div layout vertical center center-justified style="background:#1B5E20;">
+      <div layout vertical center center-justified style="background:#F44336;">
         <div>1</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#2E7D32;">
+      <div layout vertical center center-justified style="background:#E91E63;">
         <div>2</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#388E3C;">
+      <div layout vertical center center-justified style="background:#9C27B0;">
         <div>3</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#43A047;">
+      <div layout vertical center center-justified style="background:#673AB7;">
         <div>4</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#4CAF50;">
+      <div layout vertical center center-justified style="background:#3F51B5;">
         <div>5</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#66BB6A;">
+      <div layout vertical center center-justified style="background:#2196F3;">
         <div>6</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#81C784;">
+      <div layout vertical center center-justified style="background:#03A9F4;">
         <div>7</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#A5D6A7;">
+      <div layout vertical center center-justified style="background:#00BCD4;">
         <div>8</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#C8E6C9;">
+      <div layout vertical center center-justified style="background:#009688;">
         <div>9</div>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#E8F5E9;">
+      <div layout vertical center center-justified style="background:#4CAF50;">
         <div>10</div>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#8BC34A;">
+        <div>11</div>
       </div>
     </section>
   </core-animated-pages>
 
   <div horizontal layout center-justified class="controls">
-      <div><paper-fab icon="arrow-back" class="light-grey" title="arrow-back" onclick="back()"></paper-fab></div>
-      <div flex><paper-progress></paper-progress></div>
-      <div><paper-fab icon="arrow-forward" class="grey" title="arrow-forward" onclick="next()"></paper-fab></div>
+      <div><paper-fab mini icon="arrow-back" class="light-grey" title="arrow-back" onclick="back()"></paper-fab></div>
+      <div flex><!-- <paper-progress></paper-progress> --></div>
+      <div><paper-fab mini icon="arrow-forward" class="grey" title="arrow-forward" onclick="next()"></paper-fab></div>
   </div>
 
   <script>
@@ -143,21 +148,17 @@
     var max = (document.getElementsByTagName('section').length - 1);
     var currentPage = document.querySelector('core-animated-pages');
 
-    function updateProgress() {
-      startProgress();
-    }
-
     function next() {
       if ((currentPage.selected) < max) {
         currentPage.selected++;
-        updateProgress();
+        // startNextProgress();
       }
     }
 
     function back() {
       if ((currentPage.selected) > 0) {
         currentPage.selected--;
-        updateProgress();
+        // startPreviousProgress();
       }
     }
 
@@ -174,12 +175,12 @@
       }
     }
 
-        var progress = document.querySelector('paper-progress');
-    // var button = document.querySelector('paper-button');
-    
+    var progress = document.querySelector('paper-progress');    
     var repeat, maxRepeat = 1, animating = false;
     
     function nextProgress() {
+      console.log("currentPage.selected = " + currentPage.selected);
+      // console.log("progress.value = " + progress.value);
       animating = true;
       if (progress.value < (currentPage.selected+1)*10) {
         progress.value += (progress.step || 1);
@@ -193,7 +194,18 @@
       progress.async(nextProgress);
     }
 
+
+    function startNextProgress() {
+      repeat = 0;
+      progress.value = ((currentPage.selected)*10);
+      if (!animating) {
+        nextProgress();
+      }
+    }
+
     function previousProgress() {
+      console.log("currentPage.selected = " + currentPage.selected);
+      // console.log("progress.value = " + progress.value);
       animating = true;
       if (progress.value > (currentPage.selected-1)*10) {
         progress.value -= (progress.step || 1);
@@ -204,10 +216,10 @@
         }
         progress.value = progress.min;
       }
-      progress.async(nextProgress);
+      progress.async(previousProgress);
     }
-    
-    function startProgress() {
+
+    function startPreviousProgress() {
       repeat = 0;
       progress.value = ((currentPage.selected)*10);
       if (!animating) {
@@ -216,7 +228,7 @@
     }
     
     addEventListener('polymer-ready', function() {
-      startProgress();
+      startNextProgress();
     });
   </script>
 </body>
