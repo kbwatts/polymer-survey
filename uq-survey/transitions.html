@@ -20,6 +20,7 @@
   <link href="https://www.polymer-project.org/components/core-icons/core-icons.html" rel="import">
   <link href="https://www.polymer-project.org/components/paper-fab/paper-fab.html" rel="import">
   <link rel="import" href="https://www.polymer-project.org/components/paper-progress/paper-progress.html">
+  <link href="https://www.polymer-project.org/components/paper-shadow/paper-shadow.html" rel="import">
 
   <style>
     body {
@@ -45,7 +46,7 @@
 
     section > div {
       height: 100%;
-      color: white;
+      color: #212121;
     }
     paper-fab {
       color: #fff;
@@ -72,6 +73,18 @@
       width: 100%;
       padding: 25px 0;
     }
+    .card {
+      font-color: #424242;
+      font-size: 18px;
+      display: inline-block;
+      background: white;
+      box-sizing: border-box;
+      width: 80%;
+      height: 80%;
+      margin: 16px;
+      padding: 16px;
+      border-radius: 2px;
+    }
 
   </style>
 
@@ -81,13 +94,17 @@
 
   <core-animated-pages onclick="next();" transitions="slide-from-right">
     <section>
-      <div layout vertical center center-justified style="background:#F44336;">
-        <div>1</div>
+      <div layout vertical center center-justified style="background:#eee;">
+        <paper-shadow class="card" z="2">
+          Sample text
+        </paper-shadow>
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#E91E63;">
-        <div>2</div>
+      <div layout vertical center center-justified style="background:#eee;">
+        <paper-shadow class="card" z="2">
+          Sample text
+        </paper-shadow>
       </div>
     </section>
     <section>
