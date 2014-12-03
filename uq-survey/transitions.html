@@ -17,6 +17,7 @@
   <script src="https://www.polymer-project.org/components/webcomponentsjs/webcomponents.js"></script>
   <link href="https://www.polymer-project.org/components/core-animated-pages/core-animated-pages.html" rel="import">
   <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/slide-from-right.html" rel="import">
+  <link href="https://www.polymer-project.org/components/core-animated-pages/transitions/cross-fade.html" rel="import">
   <link href="https://www.polymer-project.org/components/core-icons/core-icons.html" rel="import">
   <link href="https://www.polymer-project.org/components/paper-fab/paper-fab.html" rel="import">
   <link rel="import" href="https://www.polymer-project.org/components/paper-progress/paper-progress.html">
@@ -77,38 +78,33 @@
       font-color: #424242;
       font-size: 18px;
       display: inline-block;
-      background: white;
+      background: #333;
       box-sizing: border-box;
       width: 80%;
       height: 80%;
-      margin: 16px;
-      padding: 16px;
-      border-radius: 2px;
+      /*margin: 16px;*/
+      /*padding: 1px;*/
+      border-radius: 3px;
     }
     .title {
       color: #eee;
     }
-
-    video#bgvid {
-      position: fixed; right: 0; bottom: 0;
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto; z-index: -100;
-      background: url(../../../../Pictures/orig_trey-ratcliff-road-to-mountain-forever.jpg) no-repeat;
-      background-size: cover;
+    .text {
+      font-size: 18px;
     }
-
   </style>
 
 </head>
 <body unresolved>
 
 
-  <core-animated-pages onclick="next();" transitions="slide-from-right">
+  <core-animated-pages onclick="next();" transitions="cross-fade-all">
+  
     <section>
-      <div layout vertical left center-justified style="background:#6A1B9A;">
+      <div layout vertical left center-justified style="background:#7B1FA2;">
         <div horizontal layout>
           <div flex></div>
-          <div flex twelve class="title">Accessibility @ UQ Library</div>
+          <div flex twelve class="title">Web Accessibility @ UQ Library</div>
         </div>
       </div>
     </section>
@@ -137,12 +133,11 @@
       </div>
 
     </section>
-    <section>
-<!-- get a screenshot of the accessibility checker in the terminal or something... -->
-      <div layout vertical center center-justified>
-        <a href="http://www.theguardian.com/world/interactive/2013/feb/12/state-of-the-union-reading-level" style="border:none;height:100%;"><img src="../images/fk.png" style="border:none;height:100%;"></a>
-      </div>
 
+    <section>
+      
+      <iframe src="http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests" seamless="" style="border:none;width:100%;height:100%;"></iframe>
+      
     </section>
 
     <section>
@@ -151,13 +146,23 @@
         <img src="../images/fk-gh.png" style="border:none;height:100%;">
       </div>
       
-      <!-- <video  poster="" width="100%" height="100%">
-        <source src="" type="video/mp4">
-      </video> -->
+    </section>
 
-      <!-- from http://demosthenes.info/blog/777/Create-Fullscreen-HTML5-Page-Background-Video -->
+    <section>
+
+      <div layout vertical center center-justified>
+        <img src="../images/sotu.png" style="border:none;height:100%;"></a>
+      </div>
 
     </section>
+    <section>
+
+      <div layout vertical center center-justified>
+        <img src="../images/sotu-amended.png" style="border:none;height:100%;"></a>
+      </div>
+
+    </section>
+
     <section>
       <div layout vertical left center-justified style="background:#3949AB;">
         <div horizontal layout>
@@ -167,37 +172,66 @@
       </div>
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#03A9F4;">
-        <div>7</div>
-      </div>
+      
+      <iframe src="http://www.uq.edu.au/omc/web-accessibility" seamless="" style="border:none;width:100%;height:100%;"></iframe>
+      
     </section>
     <section>
-      <div layout vertical center center-justified style="background:#00BCD4;">
-        <div>8</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:#009688;">
-        <div>9</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:#4CAF50;">
-        <div>10</div>
-      </div>
-    </section>
-    <section>
-      <div layout vertical center center-justified style="background:#8BC34A;">
-        <div>11</div>
+      <div layout vertical center center-justified style="background:#eee;">
+        <paper-shadow class="card" z="2">
+          <video height="100%" width="100%" style="border-radius:3px;" controls>
+            <source src="../video/1-setup.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </paper-shadow>
       </div>
     </section>
     <section>
       <div layout vertical center center-justified style="background:#eee;">
         <paper-shadow class="card" z="2">
-          Sample text
+          <video height="100%" width="100%" style="border-radius:3px;" controls>
+            <source src="../video/2-lib.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
         </paper-shadow>
       </div>
     </section>
+    <section>
+      <div layout vertical center center-justified style="background:#eee;">
+        <paper-shadow class="card" z="2">
+          <video height="100%" width="100%" style="border-radius:3px;" controls>
+            <source src="../video/3-summon.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </paper-shadow>
+      </div>
+    </section>
+    <section>
+      <div layout vertical center center-justified style="background:#eee;">
+        <paper-shadow class="card" z="2">
+          <video height="100%" width="100%" style="border-radius:3px;" controls>
+            <source src="../video/4-improved.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </paper-shadow>
+      </div>
+    </section>
+
+    <section>
+      
+      <iframe src="https://www.library.uq.edu.au/" seamless="" style="border:none;width:100%;height:100%;"></iframe>
+      
+    </section>
+
+    <section>
+      
+      <iframe src="https://app.library.uq.edu.au/v1/home/" seamless="" style="border:none;width:100%;height:100%;"></iframe>
+      
+    </section>
+
+
+
+   
   </core-animated-pages>
 
   <div horizontal layout center-justified class="controls">
